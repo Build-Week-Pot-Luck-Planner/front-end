@@ -18,9 +18,11 @@ import { PotluckContext } from './contexts/PotluckContext';
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
   background-color: lightgrey;
   padding-bottom: 10px;
+  height: 50px;
 `;
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
       <div className="App">
         <NavBar>
           <Link to="/potlucks">Potlucks Page</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link>
         </NavBar>
 
         <Switch>

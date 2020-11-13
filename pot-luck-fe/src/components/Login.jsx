@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useHistory } from 'react-router-dom';
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 function Login() {
@@ -7,6 +8,8 @@ function Login() {
         username: '',
         password: ''
     })
+
+    const history = useHistory();
 
     const onChange = e => {
         setFormData({
@@ -22,12 +25,21 @@ function Login() {
         // setting up for sending POST once I have the deployed backend endpoint
         /* axiosWithAuth() 
                 .post(``, formData)
+                .then(res => {
+                    console.log(res);
+                    // localStorage.setItem("token", ?res.data?)
+                })
+                .catch(err => {
+                    console.log(err)
+                });
         */
 
         setFormData({
             username: '',
             password: '',
         })
+
+        // history.push("/potlucks");
     }
 
     return (
