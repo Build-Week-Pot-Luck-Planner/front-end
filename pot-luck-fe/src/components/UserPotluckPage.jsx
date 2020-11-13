@@ -1,9 +1,11 @@
 import React from 'react';
+import PotluckCard from './PotluckCard';
+
 
 const UserPotluckPage = () => {
 
   return (
-    <h1>User Profile Page</h1>
+    <PotluckCard />
   )
 }
 
