@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 function Login() {
 
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: ''
     })
 
@@ -18,8 +19,13 @@ function Login() {
 
     const onSub = e => {
         e.preventDefault();
+        // setting up for sending POST once I have the deployed backend endpoint
+        /* axiosWithAuth() 
+                .post(``, formData)
+        */
+
         setFormData({
-            email: '',
+            username: '',
             password: '',
         })
     }
@@ -29,7 +35,7 @@ function Login() {
             <form onSubmit={onSub} >
             <h1>Login</h1>
             <label  >
-                email
+                username
             <input  type='text' name='email' onChange={onChange} value={formData.email}/>
             
             </label>
