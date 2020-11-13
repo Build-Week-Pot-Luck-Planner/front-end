@@ -3,11 +3,9 @@ import SelectUSState from 'react-select-us-states';
 
 function SignUp() {
     const [formData, setFormData] = useState({
-        fName: "",
-        lName: "",
+        username: "",
         email: "",
         password: "",
-        imageURL: "",
         Location: "",
     });
 
@@ -28,11 +26,10 @@ const statePick = (newVal) => {
 
 const submit = (event) => {
     event.preventDefault();
-    setFormData({   fName: "",
-    lName: "",
+    setFormData({
+    username: "",
     email: "",
     password: "",
-    imageURL: "",
     Location: "",});
     
 
@@ -43,12 +40,8 @@ const submit = (event) => {
             <h1>Sign Up!</h1>
             <form onSubmit={submit}>
                 <label>
-                First Name
+                Username
                 <input name="fName" type="text" onChange={onInputChange}  value={formData.fName}/>
-                </label>
-                <label>
-                Last Name
-                <input name="lName" type="text" onChange={onInputChange}  value={formData.lName}/>
                 </label>
                 <label>
                 Email
@@ -64,14 +57,6 @@ const submit = (event) => {
       
                
                 </label>
-
-                
-                <label>
-                Image Url   
-                <input name="imageURL" type="text" onChange={onInputChange} value={formData.imageURL} />
-                </label>
-
-
 
             <input type="submit" value="Submit" />
             </form>
