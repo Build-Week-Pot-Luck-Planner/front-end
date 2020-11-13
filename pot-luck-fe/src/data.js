@@ -11,7 +11,7 @@ const data = [
     title: "Test Title 2",
     datetime: "11/11/2020 4:30 PM",
     location: "Nowhere",
-    items: ["food", "drinks", "condiments"],
+    items: ["food", "drinks", "condiments", "food", "drinks", "condiments"],
   },
   {
     id: 2,

@@ -7,6 +7,7 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
+import PrivateRoute from './components/PrivateRoute';
 import UserPotluckPage from './components/UserPotluckPage';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
@@ -22,28 +23,23 @@ const NavBar = styled.header`
 
 function App() {
   return (
-
-
-
     <div className="App">
       <NavBar>
-        <h1>Placeholder login bar</h1>
+        <Link to="/potlucks">Potlucks Page</Link>
       </NavBar>
 
-   
-
-
       <Switch>
-          <Route exact path="/">
-          <UserPotluckPage /> 
-          </Route>
-          <Route  path="/signup" >
-            <SignUp />
-          </Route>
-          <Route path="/login" >
-            <Login />
-          </Route>
-        </Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <PrivateRoute exact path="/potlucks" component={UserPotluckPage} />
+      </Switch>
     </div>
   );
 }

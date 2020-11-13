@@ -47,6 +47,7 @@ const PotluckCard = () => {
       <h1>{potluck.title}</h1>
       <DataContainer>
       <ItemContainer>
+        <h3>Items to Bring</h3>
       {potluck.items.map(item => {
         return(
           <li key={item}>{item}</li>
