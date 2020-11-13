@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import data from '../data';
 import styled from 'styled-components';
+import { PotluckContext } from '../contexts/PotluckContext';
+
+const Container = styled.div`
+border: 2px #80808059 solid;
+border-radius: 3px;
+padding: 2%;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-evenly;
+`
 
 const Potluck = styled.div`
 box-shadow: 5px 5px 15px black;
@@ -11,15 +21,6 @@ padding: 1rem;
 max-width: 500px;
 margin: 1rem 0;
 text-align: center;
-`
-
-const Container = styled.div`
-border: 2px #80808059 solid;
-border-radius: 3px;
-padding: 2%;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-evenly;
 `
 
 const DataContainer = styled.div`
@@ -39,9 +40,11 @@ width: 45%;
 
 const PotluckCard = () => {
 
+  const potluck = useContext(PotluckContext);
+
   return (
     <Container>
-    {data.map(potluck => {
+    {potluck.map(potluck => {
       return (
         <Potluck key={potluck.id}>
       <h1>{potluck.title}</h1>
