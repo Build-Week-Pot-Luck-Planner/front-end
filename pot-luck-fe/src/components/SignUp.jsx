@@ -23,7 +23,7 @@ const statePick = (newVal) => {
     setFormData({
         ...formData,
         [formData.Location]: newVal
-    })
+    });
 }
 
 const submit = (event) => {
@@ -33,7 +33,7 @@ const submit = (event) => {
     email: "",
     password: "",
     imageURL: "",
-    Location: "",})
+    Location: "",});
     
 
 }
