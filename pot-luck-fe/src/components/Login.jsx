@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom';
-import axiosWithAuth from "../utils/axiosWithAuth";
+// import axiosWithAuth from "../utils/axiosWithAuth";
+import axios from 'axios';
 
 function Login() {
 
@@ -23,16 +24,15 @@ function Login() {
     const onSub = e => {
         e.preventDefault();
         // setting up for sending POST once I have the deployed backend endpoint
-        /* axiosWithAuth() 
-                .post(``, formData)
-                .then(res => {
-                    console.log(res);
-                    // localStorage.setItem("token", ?res.data?)
-                })
-                .catch(err => {
-                    console.log(err)
-                });
-        */
+        axios 
+            .post(`https://bw-potluckplanner.herokuapp.com/api/login`, formData)
+            .then(res => {
+                console.log(res);
+                // localStorage.setItem("token", ?res.data?)
+            })
+            .catch(err => {
+                console.log(err)
+            });
 
         setFormData({
             username: '',

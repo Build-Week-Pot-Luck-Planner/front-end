@@ -1,16 +1,5 @@
-import React, { useContext } from 'react';
-import data from '../data';
+import React from 'react';
 import styled from 'styled-components';
-import { PotluckContext } from '../contexts/PotluckContext';
-
-const Container = styled.div`
-border: 2px #80808059 solid;
-border-radius: 3px;
-padding: 2%;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-evenly;
-`
 
 const Potluck = styled.div`
 box-shadow: 5px 5px 15px black;
@@ -38,20 +27,17 @@ border: 1px solid black;
 width: 45%;
 `
 
-const PotluckCard = () => {
+const PotluckCard = (props) => {
 
-  const potluck = useContext(PotluckContext);
 
   return (
-    <Container>
-    {potluck.map(potluck => {
-      return (
-        <Potluck key={potluck.id}>
-      <h1>{potluck.title}</h1>
+    <>
+        <Potluck key={props.potluck.id}>
+      <h1>{props.potluck.title}</h1>
       <DataContainer>
       <ItemContainer>
         <h3>Items to Bring</h3>
-      {potluck.items.map(item => {
+      {props.potluck.items.map(item => {
         return(
           <li key={item}>{item}</li>
           )
@@ -59,14 +45,14 @@ const PotluckCard = () => {
         )}
         </ItemContainer>
         <DateTimeContainer>
-        <p>When: {potluck.datetime}</p>
-        <p>Where: {potluck.location}</p>
+        <p>When: {props.potluck.datetime}</p>
+        <p>Where: {props.potluck.location}</p>
         </DateTimeContainer>
         </DataContainer>
         <button>Edit</button>
       </Potluck>
-    )})}
-    </Container>
+    
+    </>
   )
 }
 

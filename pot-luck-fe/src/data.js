@@ -43,4 +43,12 @@ const data = [
   },
 ];
 
+export const userData = {
+    username: "mockUser",
+    location: "Idaho",
+    email: "nope@nope.com",
+    profilePic: "urlHere",
+    password: "1234"
+  }
+
 export default data;
