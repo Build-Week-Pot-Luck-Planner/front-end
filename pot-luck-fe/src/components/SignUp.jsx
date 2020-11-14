@@ -1,13 +1,17 @@
 import React, {useState} from 'react'
+import { useHistory } from 'react-router-dom';
 import SelectUSState from 'react-select-us-states';
+import axios from 'axios';
 
 function SignUp() {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
         password: "",
-        Location: "",
+        location: "",
     });
+
+    const history = useHistory();
 
     const onInputChange = event => {
         setFormData({
@@ -20,19 +24,32 @@ function SignUp() {
 const statePick = (newVal) => {
     setFormData({
         ...formData,
-        [formData.Location]: newVal
+        [formData.location]: newVal
     });
 }
 
 const submit = (event) => {
     event.preventDefault();
+
+    // waiting for backend endpoint URLs
+    axios
+        // .get(`https://bw-potluckplanner.herokuapp.com/api`)
+        .post(`https://bw-potluckplanner.herokuapp.com/api/signup`, formData)
+        .then(res => {
+            console.log(res);
+            // localStorage.setItem("token", res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
     setFormData({
     username: "",
     email: "",
     password: "",
-    Location: "",});
+    location: "",});
     
-
+    // history.push("/potlucks");
 }
   
     return (
@@ -41,7 +58,7 @@ const submit = (event) => {
             <form onSubmit={submit}>
                 <label>
                 Username
-                <input name="fName" type="text" onChange={onInputChange}  value={formData.fName}/>
+                <input name="username" type="text" onChange={onInputChange}  value={formData.username}/>
                 </label>
                 <label>
                 Email
