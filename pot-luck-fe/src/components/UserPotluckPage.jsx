@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import PotluckCard from './PotluckCard';
 import UserInfo from './UserInfo';
 import { userData } from '../data';
@@ -25,6 +26,7 @@ justify-content: space-evenly;
 const UserPotluckPage = () => {
 
   const potluck = useContext(PotluckContext);
+  const history = useHistory();
 
   return (
     <>
@@ -37,7 +39,7 @@ const UserPotluckPage = () => {
         <PotluckCard potluck={potluck}/>
         )})}
       </PotluckContainer>
-      <button>New Potluck</button>
+      <button onClick={() => history.push("/newPotluck")}>New Potluck</button>
     </Container>
     </>
   )
