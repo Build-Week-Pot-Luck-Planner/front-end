@@ -8,12 +8,13 @@ import {
   useParams
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
-import UserPotluckPage from './components/UserPotluckPage';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import styled from 'styled-components';
 import data from "./data";
 import { PotluckContext } from './contexts/PotluckContext';
+import UserPotluckPage from './components/UserPotluckPage';
+import NewPotluckForm from './components/NewPotluckForm';
 
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
@@ -49,9 +50,10 @@ function App() {
             <Login />
           </Route>
           <PrivateRoute exact path="/potlucks" component={UserPotluckPage} />
+          <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
         </Switch>
       </div>
-      </PotluckContext.Provider>
+    </PotluckContext.Provider>
   );
 }
 
