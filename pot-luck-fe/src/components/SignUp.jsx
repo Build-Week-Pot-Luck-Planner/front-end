@@ -24,8 +24,9 @@ function SignUp() {
 const statePick = (newVal) => {
     setFormData({
         ...formData,
-        [formData.location]: newVal
+        "location": newVal
     });
+    console.log("state picker data: ", formData.location);
 }
 
 const submit = (event) => {
@@ -37,6 +38,7 @@ const submit = (event) => {
         .then(res => {
             console.log(res);
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("username", formData.username);
         })
         .catch(err => {
             console.log(err);
