@@ -23,12 +23,11 @@ function Login() {
 
     const onSub = e => {
         e.preventDefault();
-        // setting up for sending POST once I have the deployed backend endpoint
         axios 
-            .post(`https://bw-potluckplanner.herokuapp.com/api/login`, formData)
+            .post(`https://bw-potluckplanner.herokuapp.com/api/auth/login`, formData)
             .then(res => {
                 console.log(res);
-                // localStorage.setItem("token", ?res.data?)
+                localStorage.setItem("token", res.data.token)
             })
             .catch(err => {
                 console.log(err)
@@ -39,7 +38,7 @@ function Login() {
             password: '',
         })
 
-        // history.push("/potlucks");
+        history.push("/potlucks");
     }
 
     return (
@@ -48,7 +47,7 @@ function Login() {
             <h1>Login</h1>
             <label  >
                 username
-            <input  type='text' name='email' onChange={onChange} value={formData.email}/>
+            <input  type='text' name='username' onChange={onChange} value={formData.username}/>
             
             </label>
             <label>

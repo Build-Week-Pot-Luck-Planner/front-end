@@ -31,13 +31,12 @@ const statePick = (newVal) => {
 const submit = (event) => {
     event.preventDefault();
 
-    // waiting for backend endpoint URLs
     axios
         // .get(`https://bw-potluckplanner.herokuapp.com/api`)
-        .post(`https://bw-potluckplanner.herokuapp.com/api/signup`, formData)
+        .post(`https://bw-potluckplanner.herokuapp.com/api/auth/signup`, formData)
         .then(res => {
             console.log(res);
-            // localStorage.setItem("token", res.data);
+            localStorage.setItem("token", res.data.token);
         })
         .catch(err => {
             console.log(err);
@@ -49,7 +48,7 @@ const submit = (event) => {
     password: "",
     location: "",});
     
-    // history.push("/potlucks");
+    history.push("/potlucks");
 }
   
     return (
