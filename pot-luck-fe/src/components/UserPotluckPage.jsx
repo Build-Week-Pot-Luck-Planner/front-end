@@ -37,6 +37,8 @@ const UserPotluckPage = () => {
     username: ""
   });
 
+  const [potlucks, setPotlucks] = useState([]);
+
   useEffect(() => {
     axiosWithAuth()
       .get(`https://bw-potluckplanner.herokuapp.com/api/users?username=${username}`)
@@ -61,12 +63,17 @@ const UserPotluckPage = () => {
     <UserInfo user={user}/>
     <Container>
       <h2>My Potlucks</h2>
+      {
+        potlucks[0] ? 
       <PotluckContainer>
       {potluck.map(potluck => {
       return (
         <PotluckCard potluck={potluck}/>
         )})}
-      </PotluckContainer>
+      </PotluckContainer> 
+      : 
+      <h3>Add a Potluck to begin organizing</h3>
+      }
       <button onClick={() => history.push("/newPotluck")}>New Potluck</button>
     </Container>
     </>
