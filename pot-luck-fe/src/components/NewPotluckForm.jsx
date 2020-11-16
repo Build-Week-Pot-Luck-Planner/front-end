@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import SelectUSState from 'react-select-us-states';
 
 const NewPotluckForm = () => {
-  // const [startDate, setStartDate] = useState(new Date());
 
   const [formData, setFormData] = useState({
     title: "",
@@ -29,6 +29,13 @@ const NewPotluckForm = () => {
     console.log(formData)
   }
 
+  const statePick = (newVal) => {
+    setFormData({
+        ...formData,
+        location: newVal
+    });
+}
+
   return (
     <div>
     <h1>Add New Potluck</h1>
@@ -43,14 +50,7 @@ const NewPotluckForm = () => {
       />
       <br/>
 
-      <input 
-      type="text"
-      name="location"
-      id="location"
-      placeholder="Location"
-      value={formData.location}
-      onChange={changeHandler}
-      />
+      <SelectUSState  onChange={statePick}/>
       <br/>
 
       <textarea 
