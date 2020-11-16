@@ -14,7 +14,13 @@ function EditUserForm() {
         .get(`https://bw-potluckplanner.herokuapp.com/api/users/${id.id}`)
         .then(res => {
           console.log(res);
-          // console.log(id);
+          setFormData({
+            username: res.data.user.username,
+            email: res.data.user.email,
+            password: res.data.user.password,
+            location: res.data.user.location,
+            pfp: res.data.user.pfp,
+          })
         })
         .catch(err => {
           console.log(err);
@@ -27,6 +33,7 @@ function EditUserForm() {
         email: "",
         password: "",
         location: "",
+        pfp: "",
     });
 
     const history = useHistory();
@@ -76,14 +83,22 @@ const submit = (event) => {
                 Username
                 <input name="username" type="text" onChange={onInputChange}  value={formData.username}/>
                 </label>
+                <br />
                 <label>
                 Email
                 <input name="email" type="text" onChange={onInputChange}  value={formData.email}/>
                 </label>
+                <br />
                 <label>
                 Password
                 <input name="password" type="password" onChange={onInputChange}value={formData.password}/>
                 </label>
+                <br />
+                <label>
+                Profile Picture URL
+                <input name="pfp" type="text" onChange={onInputChange}value={formData.pfp}/>
+                </label>
+                <br />
                 <label>
                 <br />  Location
                <SelectUSState  onChange={statePick}/>
