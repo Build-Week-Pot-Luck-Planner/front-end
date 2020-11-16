@@ -9,15 +9,22 @@ const NewPotluckForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     location: "",
-    items: "",
+    items: [],
     date: new Date(),
   })
 
   const changeHandler = (e) => {
+    e.target.name !== "items" ? 
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-    })
+    }) 
+    :
+    setFormData({
+      ...formData,
+      items: e.target.value.split(", ")
+    }) 
+  
     console.log(formData)
   }
 
@@ -57,7 +64,7 @@ const NewPotluckForm = () => {
       name="items"
       id="items"
       placeholder="Add new items separated by commas"
-      value={formData.items}
+      value={formData.items.join(', ')}
       onChange={changeHandler}
       />
       <br/>
