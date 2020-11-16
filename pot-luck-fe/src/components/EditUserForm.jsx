@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import SelectUSState from 'react-select-us-states';
 import axiosWithAuth from '../utils/axiosWithAuth';
@@ -8,6 +8,19 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 function EditUserForm() {
     // const user = useContext(UserContext);
     const id = useParams();
+
+    useEffect(() => {
+      axiosWithAuth()
+        .get(`https://bw-potluckplanner.herokuapp.com/api/users/${id.id}`)
+        .then(res => {
+          console.log(res);
+          // console.log(id);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+    }, [])
 
     const [formData, setFormData] = useState({
         username: "",
@@ -36,12 +49,14 @@ const submit = (event) => {
     event.preventDefault();
 
     axiosWithAuth()
-        .put(`https://bw-potluckplanner.herokuapp.com/api/users/:5`, formData)
+        .put(`https://bw-potluckplanner.herokuapp.com/api/users/${id.id}`, formData)
         .then(res => {
             console.log(res);
+            console.log("Id for PUT: ", id);
         })
         .catch(err => {
             console.log(err);
+            console.log(id);
         })
 
     setFormData({

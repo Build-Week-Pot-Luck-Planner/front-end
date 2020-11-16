@@ -44,7 +44,7 @@ const UserPotluckPage = () => {
     axiosWithAuth()
       .get(`https://bw-potluckplanner.herokuapp.com/api/users?username=${username}`)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setUser({
           ...user,
           email: res.data.users[0].email,
@@ -58,11 +58,6 @@ const UserPotluckPage = () => {
         console.log(err);
       })
   }, [])
-
-  // useEffect(() => {
-  //   axiosWithAuth()
-  //     .get(`https://bw-potluckplanner.herokuapp.com/api/`)
-  // })
 
   return (
     <>

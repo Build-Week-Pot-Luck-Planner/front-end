@@ -23,6 +23,7 @@ function Login() {
 
     const onSub = e => {
         e.preventDefault();
+        localStorage.setItem("username", formData.username);
         axios 
             .post(`https://bw-potluckplanner.herokuapp.com/api/auth/login`, formData)
             .then(res => {

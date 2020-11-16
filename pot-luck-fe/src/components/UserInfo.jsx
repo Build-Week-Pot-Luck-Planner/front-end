@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { UserContext } from '../contexts/UserContext';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -22,7 +23,7 @@ const UserInfo = () => {
     <h3>Username: {user.username}</h3>
     <p>Email: {user.email}</p>
     <p>Location: {user.location}</p>
-    <button onClick={() => history.push(`/editUser/:${id}`)}>Edit Profile</button>
+    <button onClick={() => history.push(`/editUser/${id}`)}>Edit Profile</button>
     </div>
   )
 }
