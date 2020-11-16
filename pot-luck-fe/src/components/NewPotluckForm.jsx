@@ -4,7 +4,30 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 const NewPotluckForm = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  // const [startDate, setStartDate] = useState(new Date());
+
+  const [formData, setFormData] = useState({
+    title: "",
+    location: "",
+    items: "",
+    date: new Date(),
+  })
+
+  const changeHandler = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+    console.log(formData)
+  }
+
+  const dateHandler = (date) => {
+    setFormData({
+      ...formData,
+      date: date
+    });
+    console.log(formData)
+  }
 
   return (
     <div>
@@ -15,6 +38,8 @@ const NewPotluckForm = () => {
       name="title"
       id="title"
       placeholder="Title"
+      value={formData.title}
+      onChange={changeHandler}
       />
       <br/>
 
@@ -23,6 +48,8 @@ const NewPotluckForm = () => {
       name="location"
       id="location"
       placeholder="Location"
+      value={formData.location}
+      onChange={changeHandler}
       />
       <br/>
 
@@ -30,12 +57,14 @@ const NewPotluckForm = () => {
       name="items"
       id="items"
       placeholder="Add new items separated by commas"
+      value={formData.items}
+      onChange={changeHandler}
       />
       <br/>
 
       <DatePicker
-      selected={startDate}
-      onChange={date => setStartDate(date)}
+      selected={formData.date}
+      onChange={dateHandler}
       timeInputLabel="Time:"
       dateFormat="MM/dd/yyyy h:mm aa"
       showTimeInput

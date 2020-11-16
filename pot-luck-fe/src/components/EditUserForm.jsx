@@ -1,12 +1,9 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import SelectUSState from 'react-select-us-states';
 import axiosWithAuth from '../utils/axiosWithAuth';
-// import { UserContext } from '../contexts/UserContext';
-
 
 function EditUserForm() {
-    // const user = useContext(UserContext);
     const id = useParams();
 
     useEffect(() => {
