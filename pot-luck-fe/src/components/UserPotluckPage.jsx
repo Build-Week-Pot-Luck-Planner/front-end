@@ -4,6 +4,7 @@ import PotluckCard from './PotluckCard';
 import UserInfo from './UserInfo';
 import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
+import { UserContext } from '../contexts/UserContext';
 import axiosWithAuth from '../utils/axiosWithAuth';
 
 const Container = styled.div`
@@ -58,9 +59,16 @@ const UserPotluckPage = () => {
       })
   }, [])
 
+  // useEffect(() => {
+  //   axiosWithAuth()
+  //     .get(`https://bw-potluckplanner.herokuapp.com/api/`)
+  // })
+
   return (
     <>
-    <UserInfo user={user}/>
+    <UserContext.Provider value={user}>
+    <UserInfo />
+    </UserContext.Provider>
     <Container>
       <h2>My Potlucks</h2>
       {

@@ -1,9 +1,14 @@
-import React, {useState} from 'react'
-import { useHistory } from 'react-router-dom';
+import React, {useState, useContext} from 'react'
+import { useHistory, useParams } from 'react-router-dom';
 import SelectUSState from 'react-select-us-states';
-import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
+// import { UserContext } from '../contexts/UserContext';
 
-function SignUp() {
+
+function EditUserForm() {
+    // const user = useContext(UserContext);
+    const id = useParams();
+
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -17,8 +22,6 @@ function SignUp() {
         setFormData({
             ...formData,
             [event.target.name]: event.target.value,
-            
-        
         });
     }
 const statePick = (newVal) => {
@@ -32,13 +35,10 @@ const statePick = (newVal) => {
 const submit = (event) => {
     event.preventDefault();
 
-    axios
-        // .get(`https://bw-potluckplanner.herokuapp.com/api`)
-        .post(`https://bw-potluckplanner.herokuapp.com/api/auth/signup`, formData)
+    axiosWithAuth()
+        .put(`https://bw-potluckplanner.herokuapp.com/api/users/:5`, formData)
         .then(res => {
             console.log(res);
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("username", formData.username);
         })
         .catch(err => {
             console.log(err);
@@ -55,7 +55,7 @@ const submit = (event) => {
   
     return (
         <div>
-            <h1>Sign Up!</h1>
+            <h1>Edit Profile</h1>
             <form onSubmit={submit}>
                 <label>
                 Username
@@ -82,4 +82,4 @@ const submit = (event) => {
     )
 }
 
-export default SignUp
+export default EditUserForm;

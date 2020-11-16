@@ -15,6 +15,7 @@ import data from "./data";
 import { PotluckContext } from './contexts/PotluckContext';
 import UserPotluckPage from './components/UserPotluckPage';
 import NewPotluckForm from './components/NewPotluckForm';
+import EditUserForm from './components/EditUserForm';
 
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
@@ -51,6 +52,7 @@ function App() {
           </Route>
           <PrivateRoute exact path="/potlucks" component={UserPotluckPage} />
           <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
+          <PrivateRoute exact path="/editUser/:id" component={EditUserForm} />
         </Switch>
       </div>
     </PotluckContext.Provider>
