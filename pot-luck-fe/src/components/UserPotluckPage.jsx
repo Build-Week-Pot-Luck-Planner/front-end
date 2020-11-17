@@ -71,7 +71,7 @@ const UserPotluckPage = (props) => {
       .catch(err => {
         console.log(err);
       })
-  }, [])
+  }, [user.id])
 
   return (
     <>
