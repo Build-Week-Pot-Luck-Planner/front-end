@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
+import axiosWithAuth from '../utils/axiosWithAuth';
+import Guest from './Guest';
 
 const GuestInvite = () => {
 
   const [search, setSearch] = useState("");
+  const [guests, setGuests] = useState([]);
 
   const changeHandler = (e) => {
     setSearch(e.target.value);
-    //  add axios call to request users with username of search value
+    axiosWithAuth()
+      .get(`https://bw-potluckplanner.herokuapp.com/api/users?username=${search}`)
+      .then(res => {
+        console.log(res);
+        setGuests(res.data.users);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   return(
@@ -25,6 +36,9 @@ const GuestInvite = () => {
       need to render a dropdown with returned users from request to allow user to invite listed users
       also need to allow user to remove a user from selected users if they want.
     */}
+    { 
+    guests[0] ? guests.map(guest => <Guest />) : <h4>No Guests Have Been Invited Yet!</h4>
+    }
     <button>Invite Guests!</button>
   </div>
   )
