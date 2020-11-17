@@ -1,14 +1,39 @@
-import React, {useState} from 'react'
-import { useHistory } from 'react-router-dom';
+import React, {useState, useContext, useEffect} from 'react'
+import { useHistory, useParams } from 'react-router-dom';
 import SelectUSState from 'react-select-us-states';
-import axios from 'axios';
+import axiosWithAuth from '../utils/axiosWithAuth';
+// import { UserContext } from '../contexts/UserContext';
 
-function SignUp() {
+
+function EditUserForm() {
+    // const user = useContext(UserContext);
+    const id = useParams();
+
+    useEffect(() => {
+      axiosWithAuth()
+        .get(`https://bw-potluckplanner.herokuapp.com/api/users/${id.id}`)
+        .then(res => {
+          console.log(res);
+          setFormData({
+            username: res.data.user.username,
+            email: res.data.user.email,
+            password: res.data.user.password,
+            location: res.data.user.location,
+            pfp: res.data.user.pfp,
+          })
+        })
+        .catch(err => {
+          console.log(err);
+        })
+
+    }, [])
+
     const [formData, setFormData] = useState({
         username: "",
         email: "",
         password: "",
         location: "",
+        pfp: "",
     });
 
     const history = useHistory();
@@ -17,8 +42,6 @@ function SignUp() {
         setFormData({
             ...formData,
             [event.target.name]: event.target.value,
-            
-        
         });
     }
 const statePick = (newVal) => {
@@ -32,16 +55,15 @@ const statePick = (newVal) => {
 const submit = (event) => {
     event.preventDefault();
 
-    axios
-        // .get(`https://bw-potluckplanner.herokuapp.com/api`)
-        .post(`https://bw-potluckplanner.herokuapp.com/api/auth/signup`, formData)
+    axiosWithAuth()
+        .put(`https://bw-potluckplanner.herokuapp.com/api/users/${id.id}`, formData)
         .then(res => {
             console.log(res);
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("username", formData.username);
+            console.log("Id for PUT: ", id);
         })
         .catch(err => {
             console.log(err);
+            console.log(id);
         })
 
     setFormData({
@@ -55,20 +77,28 @@ const submit = (event) => {
   
     return (
         <div>
-            <h1>Sign Up!</h1>
+            <h1>Edit Profile</h1>
             <form onSubmit={submit}>
                 <label>
                 Username
                 <input name="username" type="text" onChange={onInputChange}  value={formData.username}/>
                 </label>
+                <br />
                 <label>
                 Email
                 <input name="email" type="text" onChange={onInputChange}  value={formData.email}/>
                 </label>
+                <br />
                 <label>
                 Password
                 <input name="password" type="password" onChange={onInputChange}value={formData.password}/>
                 </label>
+                <br />
+                <label>
+                Profile Picture URL
+                <input name="pfp" type="text" onChange={onInputChange}value={formData.pfp}/>
+                </label>
+                <br />
                 <label>
                 <br />  Location
                <SelectUSState  onChange={statePick}/>
@@ -82,4 +112,4 @@ const submit = (event) => {
     )
 }
 
-export default SignUp
+export default EditUserForm;

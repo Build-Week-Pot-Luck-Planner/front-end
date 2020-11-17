@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PotluckCard from './PotluckCard';
 import UserInfo from './UserInfo';
-import { userData } from '../data';
 import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
+import { UserContext } from '../contexts/UserContext';
+import axiosWithAuth from '../utils/axiosWithAuth';
 
 const Container = styled.div`
 border: 2px #80808059 solid;
@@ -27,18 +28,55 @@ const UserPotluckPage = () => {
 
   const potluck = useContext(PotluckContext);
   const history = useHistory();
+  const username = localStorage.getItem("username");
+
+  const [user, setUser] = useState({
+    email: "",
+    id: "",
+    location: "",
+    pfp: "",
+    username: ""
+  });
+
+  const [potlucks, setPotlucks] = useState([]);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`https://bw-potluckplanner.herokuapp.com/api/users?username=${username}`)
+      .then(res => {
+        // console.log(res);
+        setUser({
+          ...user,
+          email: res.data.users[0].email,
+          id: res.data.users[0].id,
+          location: res.data.users[0].location,
+          pfp: res.data.users[0].pfp,
+          username: res.data.users[0].username
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [])
 
   return (
     <>
-    <UserInfo user={userData}/>
+    <UserContext.Provider value={user}>
+    <UserInfo />
+    </UserContext.Provider>
     <Container>
       <h2>My Potlucks</h2>
+      {
+        potlucks[0] ? 
       <PotluckContainer>
       {potluck.map(potluck => {
       return (
         <PotluckCard potluck={potluck}/>
         )})}
-      </PotluckContainer>
+      </PotluckContainer> 
+      : 
+      <h3>Add a Potluck to begin organizing</h3>
+      }
       <button onClick={() => history.push("/newPotluck")}>New Potluck</button>
     </Container>
     </>
