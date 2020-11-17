@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,6 +17,7 @@ import UserPotluckPage from './components/UserPotluckPage';
 import NewPotluckForm from './components/NewPotluckForm';
 import EditUserForm from './components/EditUserForm';
 import GuestInvite from './components/GuestInvite';
+import axiosWithAuth from './utils/axiosWithAuth';
 
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
@@ -30,10 +31,24 @@ const NavBar = styled.header`
 
 function App() {
 
-  const [potluckData, setPotluckData] = useState(data);
+  // const [potluckData, setPotluckData] = useState(data);
+  const [userId, setUserId] = useState(null);
+  const [userData, setUserData] = useState({});
+
+  // useEffect(() => {
+  //   console.log(userId);
+  //   axiosWithAuth()
+  //     .get(`https://bw-potluckplanner.herokuapp.com/api/users/${userId}`)
+  //     .then(res => {
+  //       console.log("This is from App.js", res);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     })
+  // }, [userId])
 
   return (
-    <PotluckContext.Provider value={potluckData}>
+    <PotluckContext.Provider value={userData}>
       <div className="App">
         <NavBar>
           <Link to="/potlucks">Potlucks Page</Link>
@@ -51,7 +66,7 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/potlucks" component={UserPotluckPage} />
+          <PrivateRoute exact path="/potlucks" component={UserPotluckPage} setUserData={setUserData}/>
           <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
           <PrivateRoute exact path="/editUser/:id" component={EditUserForm} />
           <PrivateRoute exact path="/invite" component={GuestInvite} />

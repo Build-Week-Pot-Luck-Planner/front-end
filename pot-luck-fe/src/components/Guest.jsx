@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Guest = () => {
+const Guest = (props) => {
 
 return(
-  <h4>Here go the guests</h4>
+<h4>Username: {props.guest.username}</h4>
 )
 }
 

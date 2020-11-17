@@ -24,7 +24,7 @@ flex-wrap: wrap;
 justify-content: space-evenly;
 `
 
-const UserPotluckPage = () => {
+const UserPotluckPage = (props) => {
 
   const potluck = useContext(PotluckContext);
   const history = useHistory();
@@ -53,11 +53,25 @@ const UserPotluckPage = () => {
           pfp: res.data.users[0].pfp,
           username: res.data.users[0].username
         })
+        props.setUserId(res.data.users[0].id);
       })
       .catch(err => {
         console.log(err);
       })
   }, [])
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`https://bw-potluckplanner.herokuapp.com/api/users/${user.id}`)
+      .then(res => {
+        console.log("This is from UserPotluckPage.js", res);
+        console.log(props);
+        props.setUserData(res.data.user);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [props])
 
   return (
     <>

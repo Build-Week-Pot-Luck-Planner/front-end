@@ -37,7 +37,7 @@ const GuestInvite = () => {
       also need to allow user to remove a user from selected users if they want.
     */}
     { 
-    guests[0] ? guests.map(guest => <Guest />) : <h4>No Guests Have Been Invited Yet!</h4>
+    guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest}/>) : <h4>No Guests Have Been Invited Yet!</h4>
     }
     <button>Invite Guests!</button>
   </div>
