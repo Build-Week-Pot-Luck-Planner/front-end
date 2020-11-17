@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import SelectUSState from 'react-select-us-states';
 
 const NewPotluckForm = () => {
+
+  const history = useHistory();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -25,7 +28,7 @@ const NewPotluckForm = () => {
       items: e.target.value.split(", ")
     }) 
   
-    console.log(formData)
+    // console.log(formData)
   }
 
   const dateHandler = (date) => {
@@ -43,10 +46,16 @@ const NewPotluckForm = () => {
     });
 }
 
+const submit = (e) => {
+  e.preventDefault();
+  //  add axios request to create potluck once endpoints are done
+  history.push("/invite");
+}
+
   return (
     <div>
     <h1>Add New Potluck</h1>
-    <form>
+    <form onSubmit={submit}>
       <input 
       type="text"
       name="title"
