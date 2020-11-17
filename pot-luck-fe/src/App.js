@@ -28,6 +28,16 @@ const NavBar = styled.header`
 `;
 
 function App() {
+  const links = [{
+    route: "/potlucks",
+    text: "Potlucks Page"
+  }, {
+    route: "/login",
+    text: "Login"
+  }, {
+    route: "signup",
+    text: "Signup"
+  }]
 
   const [potluckData, setPotluckData] = useState(data);
 
@@ -35,9 +45,12 @@ function App() {
     <PotluckContext.Provider value={potluckData}>
       <div className="App">
         <NavBar>
-          <Link to="/potlucks">Potlucks Page</Link>
+          {/* <Link to="/potlucks">Potlucks Page</Link>
           <Link to="/login">Login</Link>
-          <Link to="/signup">Signup</Link>
+          <Link to="/signup">Signup</Link> */}
+          {links.map((e) => {
+            return <Link to={e.route}>{e.text} </Link>
+          })}
         </NavBar>
 
         <Switch>
