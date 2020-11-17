@@ -53,7 +53,7 @@ const UserPotluckPage = (props) => {
           pfp: res.data.users[0].pfp,
           username: res.data.users[0].username
         })
-        props.setUserId(res.data.users[0].id);
+        potluck.userIdSetter(res.data.users[0].id);
       })
       .catch(err => {
         console.log(err);
@@ -66,12 +66,12 @@ const UserPotluckPage = (props) => {
       .then(res => {
         console.log("This is from UserPotluckPage.js", res);
         console.log(props);
-        props.setUserData(res.data.user);
+        potluck.userDataSetter(res.data.user);
       })
       .catch(err => {
         console.log(err);
       })
-  }, [props])
+  }, [])
 
   return (
     <>

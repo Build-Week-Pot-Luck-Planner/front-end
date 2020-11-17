@@ -43,7 +43,14 @@ function App() {
 
   // const [potluckData, setPotluckData] = useState(data);
   const [userId, setUserId] = useState(null);
+  const userIdSetter = state => {
+    setUserId(state);
+  }
+
   const [userData, setUserData] = useState({});
+   const userDataSetter = (state) => {
+     setUserData(state);
+   };
 
   // useEffect(() => {
   //   console.log(userId);
@@ -58,14 +65,20 @@ function App() {
   // }, [userId])
 
   return (
-    <PotluckContext.Provider value={userData}>
+    <PotluckContext.Provider
+      value={{ 
+        userData: userData, 
+        userIdSetter: userIdSetter, 
+        userDataSetter: userDataSetter,
+      }}
+    >
       <div className="App">
         <NavBar>
           {/* <Link to="/potlucks">Potlucks Page</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link> */}
           {links.map((e) => {
-            return <Link to={e.route}>{e.text} </Link>
+            return <Link to={e.route}>{e.text} </Link>;
           })}
         </NavBar>
 
@@ -79,7 +92,12 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/potlucks" component={UserPotluckPage} setUserData={setUserData}/>
+          <PrivateRoute
+            exact
+            path="/potlucks"
+            component={UserPotluckPage}
+            setUserData={setUserData}
+          />
           <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
           <PrivateRoute exact path="/editUser/:id" component={EditUserForm} />
           <PrivateRoute exact path="/invite" component={GuestInvite} />
