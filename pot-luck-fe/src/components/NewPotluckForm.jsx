@@ -13,7 +13,7 @@ const NewPotluckForm = () => {
     title: "",
     location: "",
     items: [],
-    date: new Date(),
+    when: new Date(),
   })
 
   const changeHandler = (e) => {
@@ -34,7 +34,7 @@ const NewPotluckForm = () => {
   const dateHandler = (date) => {
     setFormData({
       ...formData,
-      date: date
+      when: date
     });
     console.log(formData)
   }
@@ -53,12 +53,11 @@ const submit = (e) => {
     .post(`https://bw-potluckplanner.herokuapp.com/api/potlucks`, formData)
     .then(res => {
       console.log("Added New Potluck: ", res)
+      history.push(`/invite/${res.data.potluck.id}`); //Add in potluck id as param so when sent to invite page can send potluck id as well
     })
     .catch(err => {
       console.log(err);
     })
-
-  history.push(`/invite`); //Add in potluck id as param so when sent to invite page can send potluck id as well
 }
 
   return (
@@ -88,7 +87,7 @@ const submit = (e) => {
       <br/>
 
       <DatePicker
-      selected={formData.date}
+      selected={formData.when}
       onChange={dateHandler}
       timeInputLabel="Time:"
       dateFormat="MM/dd/yyyy h:mm aa"

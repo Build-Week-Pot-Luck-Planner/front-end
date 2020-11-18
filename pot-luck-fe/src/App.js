@@ -88,7 +88,7 @@ function App() {
           />
           <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
           <PrivateRoute exact path="/editUser/:id" component={EditUserForm} />
-          <PrivateRoute exact path="/invite" component={GuestInvite} />
+          <PrivateRoute exact path="/invite/:id" component={GuestInvite} />
         </Switch>
       </div>
     </PotluckContext.Provider>
