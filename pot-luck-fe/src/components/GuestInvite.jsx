@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import Guest from './Guest';
 
@@ -7,6 +8,10 @@ const GuestInvite = () => {
   const [search, setSearch] = useState("");
   const [guests, setGuests] = useState([]);
   const [invitedGuests, setInvitedGuests] = useState([]);
+  const [inviteMessage, setInviteMessage] = useState("No Guests Have Been Invited Yet!")
+
+  const id = useParams();
+  const history = useHistory();
 
   const updateGuests = (guest) => {
     // setInvitedGuests(invitedGuests.includes(guest.id) ? [...invitedGuests, guest] : invitedGuests);
@@ -30,6 +35,23 @@ const GuestInvite = () => {
       })
   }
 
+  const inviteGuests = () => {
+    invitedGuests.map(guest => {
+      return(
+      axiosWithAuth()
+        .post(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${id.id}/invitations`, guest)
+        .then(res => {
+          console.log(res)
+          setInviteMessage("Guests have been successfully Invited")
+          setInvitedGuests([]);
+        })
+        .catch(err => {
+          console.log(err);
+        }))
+      })
+      history.push("/potlucks")
+  }
+
   return(
   <div>
     <h1>You Made it to Guest Invitations page</h1>
@@ -49,9 +71,9 @@ const GuestInvite = () => {
     <br/>
     <h3>Invited Guests:</h3>
     {
-      invitedGuests[0] ? invitedGuests.map(guest => <h4>{guest.username}</h4>) : <h4>No Guests Have Been Invited Yet!</h4>
+      invitedGuests[0] ? invitedGuests.map(guest => <h4>{guest.username}</h4>) : <h4>{inviteMessage}</h4>
     }
-    <button>Invite Guests!</button>
+    <button onClick={() => inviteGuests()}>Invite Guests!</button>
   </div>
   )
 }
