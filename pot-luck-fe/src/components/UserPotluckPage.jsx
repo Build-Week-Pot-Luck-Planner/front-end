@@ -65,7 +65,6 @@ const UserPotluckPage = (props) => {
       .get(`https://bw-potluckplanner.herokuapp.com/api/users/${user.id}`)
       .then(res => {
         console.log("This is from UserPotluckPage.js", res);
-        console.log(props);
         potluck.userDataSetter(res.data.user);
       })
       .catch(err => {

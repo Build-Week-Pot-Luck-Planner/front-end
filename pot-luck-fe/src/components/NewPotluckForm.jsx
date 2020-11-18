@@ -49,7 +49,16 @@ const NewPotluckForm = () => {
 const submit = (e) => {
   e.preventDefault();
   //  add axios request to create potluck once endpoints are done
-  history.push("/invite");
+  axiosWithAuth()
+    .post(`https://bw-potluckplanner.herokuapp.com/api/potlucks`, formData)
+    .then(res => {
+      console.log("Added New Potluck: ", res)
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+  history.push(`/invite`); //Add in potluck id as param so when sent to invite page can send potluck id as well
 }
 
   return (

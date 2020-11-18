@@ -52,18 +52,6 @@ function App() {
      setUserData(state);
    };
 
-  // useEffect(() => {
-  //   console.log(userId);
-  //   axiosWithAuth()
-  //     .get(`https://bw-potluckplanner.herokuapp.com/api/users/${userId}`)
-  //     .then(res => {
-  //       console.log("This is from App.js", res);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }, [userId])
-
   return (
     <PotluckContext.Provider
       value={{ 

@@ -32,10 +32,6 @@ const GuestInvite = () => {
     value={search}
     onChange={changeHandler}
     />
-    {/* 
-      need to render a dropdown with returned users from request to allow user to invite listed users
-      also need to allow user to remove a user from selected users if they want.
-    */}
     { 
     guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest}/>) : <h4>No Guests Have Been Invited Yet!</h4>
     }
