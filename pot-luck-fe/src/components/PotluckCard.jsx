@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const Potluck = styled.div`
@@ -32,20 +32,22 @@ const PotluckCard = (props) => {
 
   return (
     <>
-        <Potluck key={props.potluck.id}>
-      <h1>{props.potluck.title}</h1>
+        <Potluck key={props.potluck.potluckId}>
+      <h2>{props.potluck.title}</h2>
       <DataContainer>
-      <ItemContainer>
-        <h3>Items to Bring</h3>
+      {/* <ItemContainer> */}
+        {/* <h3>Items to Bring</h3>
       {props.potluck.items.map(item => {
         return(
           <li key={item}>{item}</li>
           )
         }
-        )}
-        </ItemContainer>
+        )} */}
+        {/* </ItemContainer> */}
         <DateTimeContainer>
-        <p>When: {props.potluck.datetime}</p>
+        <p>When: {props.potluck.when}</p>
+        </DateTimeContainer>
+        <DateTimeContainer>
         <p>Where: {props.potluck.location}</p>
         </DateTimeContainer>
         </DataContainer>

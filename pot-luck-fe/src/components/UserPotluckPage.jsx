@@ -26,7 +26,7 @@ justify-content: space-evenly;
 
 const UserPotluckPage = (props) => {
 
-  const potluck = useContext(PotluckContext);
+  const context = useContext(PotluckContext);
   const history = useHistory();
   const username = localStorage.getItem("username");
 
@@ -35,7 +35,7 @@ const UserPotluckPage = (props) => {
     id: "",
     location: "",
     pfp: "",
-    username: ""
+    username: "",
   });
 
   const [potlucks, setPotlucks] = useState([]);
@@ -53,7 +53,7 @@ const UserPotluckPage = (props) => {
           pfp: res.data.users[0].pfp,
           username: res.data.users[0].username
         })
-        potluck.userIdSetter(res.data.users[0].id);
+        context.userIdSetter(res.data.users[0].id);
       })
       .catch(err => {
         console.log(err);
@@ -65,7 +65,9 @@ const UserPotluckPage = (props) => {
       .get(`https://bw-potluckplanner.herokuapp.com/api/users/${user.id}`)
       .then(res => {
         console.log("This is from UserPotluckPage.js", res);
-        potluck.userDataSetter(res.data.user);
+        context.userDataSetter(res.data.user);
+        setPotlucks(res.data.user.potlucks)
+        console.log("Potlucks", potlucks);
       })
       .catch(err => {
         console.log(err);
@@ -80,11 +82,11 @@ const UserPotluckPage = (props) => {
     <Container>
       <h2>My Potlucks</h2>
       {
-        potlucks[0] ? 
+      potlucks[0] ? 
       <PotluckContainer>
-      {potluck.map(potluck => {
-      return (
-        <PotluckCard potluck={potluck}/>
+        {potlucks.map(potluck => {
+          return (
+            <PotluckCard potluck={potluck}/>
         )})}
       </PotluckContainer> 
       : 
