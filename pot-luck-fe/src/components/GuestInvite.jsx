@@ -9,11 +9,12 @@ const GuestInvite = () => {
   const [invitedGuests, setInvitedGuests] = useState([]);
 
   const updateGuests = (guest) => {
+    // setInvitedGuests(invitedGuests.includes(guest.id) ? [...invitedGuests, guest] : invitedGuests);
     setInvitedGuests([...invitedGuests, guest]);
     setGuests(
     guests.filter(oldGuest => guest.id !== oldGuest.id)
     )
-    console.log(guest.id)
+    console.log(invitedGuests)
   }
 
   const changeHandler = (e) => {
@@ -33,6 +34,7 @@ const GuestInvite = () => {
   <div>
     <h1>You Made it to Guest Invitations page</h1>
     <p>Not that you've began to organize a new potluck why not invite some guests?</p>
+    <label htmlFor="search">Search: </label>
     <input 
     type="text"
     name="search"
@@ -42,11 +44,12 @@ const GuestInvite = () => {
     onChange={changeHandler}
     />
     { 
-    guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest} setGuest={updateGuests}/>) : <h4>No Guests Have Been Invited Yet!</h4>
+    guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest} setGuest={updateGuests}/>) : <h4>Search for the Username of guests you want to invite</h4>
     }
     <br/>
+    <h3>Invited Guests:</h3>
     {
-      invitedGuests.map(guest => <h4>{guest.username}</h4>)
+      invitedGuests[0] ? invitedGuests.map(guest => <h4>{guest.username}</h4>) : <h4>No Guests Have Been Invited Yet!</h4>
     }
     <button>Invite Guests!</button>
   </div>
