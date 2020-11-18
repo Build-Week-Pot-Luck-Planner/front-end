@@ -48,7 +48,6 @@ const NewPotluckForm = () => {
 
 const submit = (e) => {
   e.preventDefault();
-  //  add axios request to create potluck once endpoints are done
   axiosWithAuth()
     .post(`https://bw-potluckplanner.herokuapp.com/api/potlucks`, formData)
     .then(res => {

@@ -6,6 +6,15 @@ const GuestInvite = () => {
 
   const [search, setSearch] = useState("");
   const [guests, setGuests] = useState([]);
+  const [invitedGuests, setInvitedGuests] = useState([]);
+
+  const updateGuests = (guest) => {
+    setInvitedGuests([...invitedGuests, guest]);
+    setGuests(
+    guests.filter(oldGuest => guest.id !== oldGuest.id)
+    )
+    console.log(guest.id)
+  }
 
   const changeHandler = (e) => {
     setSearch(e.target.value);
@@ -33,7 +42,11 @@ const GuestInvite = () => {
     onChange={changeHandler}
     />
     { 
-    guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest}/>) : <h4>No Guests Have Been Invited Yet!</h4>
+    guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest} setGuest={updateGuests}/>) : <h4>No Guests Have Been Invited Yet!</h4>
+    }
+    <br/>
+    {
+      invitedGuests.map(guest => <h4>{guest.username}</h4>)
     }
     <button>Invite Guests!</button>
   </div>
