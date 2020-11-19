@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +16,8 @@ import { PotluckContext } from './contexts/PotluckContext';
 import UserPotluckPage from './components/UserPotluckPage';
 import NewPotluckForm from './components/NewPotluckForm';
 import EditUserForm from './components/EditUserForm';
+import GuestInvite from './components/GuestInvite';
+import axiosWithAuth from './utils/axiosWithAuth';
 
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
@@ -39,17 +41,32 @@ function App() {
     text: "Signup"
   }]
 
-  const [potluckData, setPotluckData] = useState(data);
+  // const [potluckData, setPotluckData] = useState(data);
+  const [userId, setUserId] = useState(null);
+  const userIdSetter = state => {
+    setUserId(state);
+  }
+
+  const [userData, setUserData] = useState({});
+   const userDataSetter = (state) => {
+     setUserData(state);
+   };
 
   return (
-    <PotluckContext.Provider value={potluckData}>
+    <PotluckContext.Provider
+      value={{ 
+        userData: userData, 
+        userIdSetter: userIdSetter, 
+        userDataSetter: userDataSetter,
+      }}
+    >
       <div className="App">
         <NavBar>
           {/* <Link to="/potlucks">Potlucks Page</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link> */}
           {links.map((e) => {
-            return <Link to={e.route}>{e.text} </Link>
+            return <Link to={e.route}>{e.text} </Link>;
           })}
         </NavBar>
 
@@ -63,9 +80,15 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
-          <PrivateRoute exact path="/potlucks" component={UserPotluckPage} />
+          <PrivateRoute
+            exact
+            path="/potlucks"
+            component={UserPotluckPage}
+            setUserData={setUserData}
+          />
           <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
           <PrivateRoute exact path="/editUser/:id" component={EditUserForm} />
+          <PrivateRoute exact path="/invite/:id" component={GuestInvite} />
         </Switch>
       </div>
     </PotluckContext.Provider>
