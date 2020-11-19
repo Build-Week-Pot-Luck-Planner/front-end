@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Potluck = styled.div`
@@ -8,18 +8,13 @@ border: 1px #f4f9e9 solid;
 border-radius: 10px;
 padding: 1rem;
 max-width: 500px;
-margin: 1rem 0;
+margin: 1rem;
 text-align: center;
 `
 
 const DataContainer = styled.div`
 display: flex;
-width: 500px;
-`
-
-const ItemContainer = styled.div`
-border: 1px solid black;
-width: 45%
+width: 450px;
 `
 
 const DateTimeContainer = styled.div`
@@ -28,6 +23,9 @@ width: 45%;
 `
 
 const PotluckCard = (props) => {
+
+  // const formattedDate = new Date(props.potluck.when);
+  const formattedDate = (props.potluck.when);
 
 
   return (
@@ -45,7 +43,7 @@ const PotluckCard = (props) => {
         )} */}
         {/* </ItemContainer> */}
         <DateTimeContainer>
-        <p>When: {props.potluck.when}</p>
+        <p>When: {formattedDate}</p>
         </DateTimeContainer>
         <DateTimeContainer>
         <p>Where: {props.potluck.location}</p>

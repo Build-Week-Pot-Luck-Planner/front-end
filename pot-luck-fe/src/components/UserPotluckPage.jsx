@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
 import { UserContext } from '../contexts/UserContext';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import UserInvites from './UserInvites';
 
 const Container = styled.div`
 border: 2px #80808059 solid;
@@ -78,6 +79,7 @@ const UserPotluckPage = (props) => {
     <>
     <UserContext.Provider value={user}>
     <UserInfo />
+    <UserInvites />
     </UserContext.Provider>
     <Container>
       <h2>My Potlucks</h2>
