@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
-// import { PotluckContext } from '../contexts/PotluckContext';
+import { PotluckContext } from '../contexts/PotluckContext';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -16,7 +16,8 @@ const PotluckDetailsPage = () => {
   const [potluck, setPotluck] = useState({})
   const [guests, setGuests] = useState([])
   const [items, setItems] = useState([])
-  // const user = useContext(PotluckContext);
+  const [guestItems, setGuestItems] = useState([]);
+  const user = useContext(PotluckContext);
 
   useEffect(() => {
      axiosWithAuth()
@@ -31,6 +32,15 @@ const PotluckDetailsPage = () => {
         console.log(err);
       })
   }, [])
+
+  const updateItem = (e) => {
+    console.log(e.target)
+    setItems([
+      ...items,
+      {...e, message: user.userData.username}
+    ])
+    
+  }
   
 
   return(
@@ -57,18 +67,32 @@ const PotluckDetailsPage = () => {
       </div>
 
       <div>
-        <h2>Items to Bring</h2>
+        <h2>Items Left to Bring</h2>
         {
           items.map(item => {
             return(
-              <div>
+              <div key={item.name}>
                 <h4>{item.name}</h4>
-                <button>Add</button>
+                <button id={item.name} onClick={updateItem}>{item.message ? item.message : "Add"}</button>
               </div>
             )
           })
         }
       </div>
+
+      {/* <div>
+        <h2>Whose Bringing What</h2>
+        {
+          items.map(item => {
+            return(
+              <div key={item.name}>
+                <h4>{item.name}</h4>
+                <button onClick={updateButtonMessage}>{buttonMessage}</button>
+              </div>
+            )
+          })
+        }
+      </div> */}
     </div>
   )
 }
