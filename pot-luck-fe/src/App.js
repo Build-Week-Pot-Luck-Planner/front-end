@@ -7,14 +7,6 @@ import {
   useRouteMatch,
   useParams
 } from "react-router-dom";
-import {
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarToggler
-} from 'reactstrap';
 import PrivateRoute from './components/PrivateRoute';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
@@ -70,26 +62,14 @@ function App() {
       }}
     >
       <div className="App">
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Potluck</NavbarBrand>
-        <NavbarToggler  />
-      
-          <Nav className="mr-auto" navbar>
-            {links.map((e) => {
-            return (
-              <Link to={e.route} >
-              <NavItem>
-                <NavLink>
-                 {e.text}
-                 </NavLink>
-              </NavItem>
-              </Link>
-            )
+        <NavBar>
+          {/* <Link to="/potlucks">Potlucks Page</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Signup</Link> */}
+          {links.map((e) => {
+            return <Link to={e.route}>{e.text} </Link>;
           })}
-
-
-          </Nav>
-      </Navbar>
+        </NavBar>
 
         <Switch>
           <Route exact path="/">
