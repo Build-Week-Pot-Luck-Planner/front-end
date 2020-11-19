@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
-import { PotluckContext } from '../contexts/PotluckContext';
+// import { PotluckContext } from '../contexts/PotluckContext';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -14,7 +14,9 @@ const PotluckDetailsPage = () => {
 
   const id = useParams();
   const [potluck, setPotluck] = useState({})
-  const user = useContext(PotluckContext);
+  const [guests, setGuests] = useState([])
+  const [items, setItems] = useState([])
+  // const user = useContext(PotluckContext);
 
   useEffect(() => {
      axiosWithAuth()
@@ -22,6 +24,8 @@ const PotluckDetailsPage = () => {
       .then(res => {
         console.log(res);
         setPotluck(res.data);
+        setGuests(res.data.guests)
+        setItems(res.data.items)
       })
       .catch(err => {
         console.log(err);
@@ -43,7 +47,7 @@ const PotluckDetailsPage = () => {
       <div>
         <h2>Guests</h2>
         {
-          potluck.guests[0] ? potluck.guests.map(guest => {
+          guests[0] ? guests.map(guest => {
             <div>
               <p>Guest Name Here</p>
               <p>Accepted or Declined Here</p>
@@ -55,7 +59,7 @@ const PotluckDetailsPage = () => {
       <div>
         <h2>Items to Bring</h2>
         {
-          potluck.items.map(item => {
+          items.map(item => {
             return(
               <div>
                 <h4>{item.name}</h4>
