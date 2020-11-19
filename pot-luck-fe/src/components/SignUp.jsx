@@ -14,7 +14,8 @@ const formSchema = yup.object().shape({
     password: yup.string()
     .min(8, "Password must be at least 8 characters")
   });
-function SignUp() {
+const SignUp = props  => {
+  
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -92,6 +93,7 @@ const submit = (event) => {
 }
     return (
         <div>
+       <h1>Need a random meal idea to try? <a href={props.useless.data.meals[0].strSource} target="_blank">Click here to find a random meal to make</a> </h1>
           <Container>
             <Row>
               <Col className="bg-primary mt-5">
