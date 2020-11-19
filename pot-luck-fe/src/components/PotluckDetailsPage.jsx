@@ -15,6 +15,7 @@ const PotluckDetailsPage = () => {
   const id = useParams();
   const [potluck, setPotluck] = useState({})
   const [guests, setGuests] = useState([])
+  const [invites, setInvites] = useState([])
   const [items, setItems] = useState([])
   const [guestItems, setGuestItems] = useState([]);
   const user = useContext(PotluckContext);
@@ -26,7 +27,20 @@ const PotluckDetailsPage = () => {
         console.log(res);
         setPotluck(res.data);
         setGuests(res.data.guests)
+        console.log(guests)
         setItems(res.data.items)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [])
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${id.potluckId}/invitations`)
+      .then(res => {
+        console.log('Potluck Invitations', res);
+        setInvites(res.data)
       })
       .catch(err => {
         console.log(err);
@@ -58,11 +72,27 @@ const PotluckDetailsPage = () => {
         <h2>Guests</h2>
         {
           guests[0] ? guests.map(guest => {
+            return(
             <div>
               <p>Guest Name Here</p>
               <p>Accepted or Declined Here</p>
             </div>
-          }) : <p>No Pending Guest Invitations</p>
+            )
+          }) : <p>No Guests Are Attending Yet</p>
+        }
+      </div>
+
+      <div>
+        <h2>Guest Invites</h2>
+        {
+          invites[0] ? invites.map(invite => {
+            return(
+            <div>
+              <p>{invite.username}</p>
+              <p>Accepted or Declined Here</p>
+            </div>
+            )
+          }) : <p>No Guests Have been Invited</p>
         }
       </div>
 
