@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
+import { PotluckContext } from '../contexts/PotluckContext';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -13,6 +14,7 @@ const PotluckDetailsPage = () => {
 
   const id = useParams();
   const [potluck, setPotluck] = useState({})
+  const user = useContext(PotluckContext);
 
   useEffect(() => {
      axiosWithAuth()
@@ -25,6 +27,7 @@ const PotluckDetailsPage = () => {
         console.log(err);
       })
   }, [])
+  
 
   return(
     <div>

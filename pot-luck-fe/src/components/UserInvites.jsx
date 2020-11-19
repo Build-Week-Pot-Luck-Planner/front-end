@@ -17,7 +17,7 @@ const UserInvites = () => {
       .catch(err => {
         console.log(err)
       })
-  }, [])
+  }, [user.id])
 
   return (
     <div>
