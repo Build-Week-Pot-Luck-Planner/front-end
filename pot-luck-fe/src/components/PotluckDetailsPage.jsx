@@ -73,7 +73,8 @@ const PotluckDetailsPage = () => {
             return(
               <div key={item.name}>
                 <h4>{item.name}</h4>
-                <button id={item.name} onClick={updateItem}>{item.message ? item.message : "Add"}</button>
+                {/* <button id={item.name} onClick={updateItem}>{item.message ? item.message : "Add"}</button> */}
+                <button>Add</button>
               </div>
             )
           })

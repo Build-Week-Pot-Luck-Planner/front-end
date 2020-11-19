@@ -41,7 +41,7 @@ const GuestInvite = () => {
       axiosWithAuth()
         .post(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${id.id}/invitations`, guest)
         .then(res => {
-          console.log(res)
+          console.log("Guest invites", res)
           setInviteMessage("Guests have been successfully Invited")
           setInvitedGuests([]);
         })
