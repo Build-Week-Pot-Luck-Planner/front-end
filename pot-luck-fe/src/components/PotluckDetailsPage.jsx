@@ -28,10 +28,30 @@ const PotluckDetailsPage = () => {
 
   return(
     <div>
-      <h1>Potluck Details Page</h1>
-      <h2>{potluck.title}</h2>
-      <ProfileImg src={potluck.organizerPfp} alt="organizers profile pic"/>
-      <h4>Organized by: {potluck.organizerUsername} </h4>
+        <h1>Potluck Details Page</h1>
+      <div>
+        <h2>{potluck.title}</h2>
+        <ProfileImg src={potluck.organizerPfp} alt="organizers profile pic"/>
+        <h4>Organized by: {potluck.organizerUsername} </h4>
+        <p>When: {potluck.when}</p>
+        <p>When: {potluck.location}</p>
+      </div>
+
+      <div>
+        <h2>Guests</h2>
+        {
+          potluck.guests[0] ? potluck.guests.map(guest => {
+            <div>
+              <p>Guest Name Here</p>
+              <p>Accepted or Declined Here</p>
+            </div>
+          }) : <p>No Pending Guest Invitations</p>
+        }
+      </div>
+
+      <div>
+        <h2>Items to Bring</h2>
+      </div>
     </div>
   )
 }
