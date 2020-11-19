@@ -40,6 +40,7 @@ const UserPotluckPage = (props) => {
   });
 
   const [potlucks, setPotlucks] = useState([]);
+  const [invites, setInvites] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
@@ -69,6 +70,17 @@ const UserPotluckPage = (props) => {
         context.userDataSetter(res.data.user);
         setPotlucks(res.data.user.potlucks)
         console.log("Potlucks", potlucks);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [user.id])
+
+    useEffect(() => {
+    axiosWithAuth()
+      .get(`https://bw-potluckplanner.herokuapp.com/api/users/${user.id}/invitations`)
+      .then(res => {
+        console.log('User Invitations', res);
       })
       .catch(err => {
         console.log(err);
