@@ -51,6 +51,16 @@ const PotluckDetailsPage = () => {
 
       <div>
         <h2>Items to Bring</h2>
+        {
+          potluck.items.map(item => {
+            return(
+              <div>
+                <h4>{item.name}</h4>
+                <button>Add</button>
+              </div>
+            )
+          })
+        }
       </div>
     </div>
   )
