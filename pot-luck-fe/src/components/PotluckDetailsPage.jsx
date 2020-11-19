@@ -126,6 +126,7 @@ const PotluckDetailsPage = () => {
         }
       </div> */}
 
+      <button>Edit Potluck</button>
       <button onClick={() => deletePotluck()}>Delete Potluck</button>
     </div>
   )
