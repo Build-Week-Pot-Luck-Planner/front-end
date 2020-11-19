@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
+import Item from './Item';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -13,6 +14,7 @@ height: 100px;
 const PotluckDetailsPage = () => {
 
   const id = useParams();
+  const history = useHistory();
   const [potluck, setPotluck] = useState({})
   const [guests, setGuests] = useState([])
   const [invites, setInvites] = useState([])
@@ -47,13 +49,16 @@ const PotluckDetailsPage = () => {
       })
   }, [])
 
-  const updateItem = (e) => {
-    console.log(e.target)
-    setItems([
-      ...items,
-      {...e, message: user.userData.username}
-    ])
-    
+  const deletePotluck = () => {
+    axiosWithAuth()
+      .delete(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${id.potluckId}`)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+      // history.push("/potlucks");
   }
   
 
@@ -97,15 +102,11 @@ const PotluckDetailsPage = () => {
       </div>
 
       <div>
-        <h2>Items Left to Bring</h2>
+        <h2>Items to Bring</h2>
         {
           items.map(item => {
             return(
-              <div key={item.name}>
-                <h4>{item.name}</h4>
-                {/* <button id={item.name} onClick={updateItem}>{item.message ? item.message : "Add"}</button> */}
-                <button>Add</button>
-              </div>
+              <Item item={item} user={user.userData} />
             )
           })
         }
@@ -124,6 +125,8 @@ const PotluckDetailsPage = () => {
           })
         }
       </div> */}
+
+      <button onClick={() => deletePotluck()}>Delete Potluck</button>
     </div>
   )
 }

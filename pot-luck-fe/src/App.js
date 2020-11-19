@@ -29,8 +29,6 @@ function App() {
   const [uselessAPI, setUselessAPI] = useState([])
   useEffect(() => {
 
-   
-
     axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
     .then(function (response) {
       // handle success
