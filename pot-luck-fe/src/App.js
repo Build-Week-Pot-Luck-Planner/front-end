@@ -26,6 +26,7 @@ import NewPotluckForm from './components/NewPotluckForm';
 import EditUserForm from './components/EditUserForm';
 import GuestInvite from './components/GuestInvite';
 import axiosWithAuth from './utils/axiosWithAuth';
+import axios from "axios";
 
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
@@ -37,7 +38,33 @@ const NavBar = styled.header`
   height: 50px;
 `;
 
+
+
+
+
 function App() {
+
+  const [uselessAPI, setUselessAPI] = useState([])
+  useEffect(() => {
+
+   
+
+    axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
+    .then(function (response) {
+      // handle success
+      
+      setUselessAPI(response)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+  }, [])
+
+
   const links = [{
     route: "/potlucks",
     text: "Potlucks Page"
@@ -71,7 +98,7 @@ function App() {
       <div className="App">
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Potluck</NavbarBrand>
-        <NavbarToggler  />
+      
       
           <Nav className="mr-auto" navbar>
             {links.map((e) => {
@@ -95,7 +122,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/signup">
-            <SignUp />
+            <SignUp useless={uselessAPI} />
           </Route>
           <Route path="/login">
             <Login />
