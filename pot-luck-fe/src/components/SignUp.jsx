@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import SelectUSState from 'react-select-us-states';
 import * as yup from 'yup'
 import axios from 'axios';
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap';
 const formSchema = yup.object().shape({
     username: yup.string()
     .min(6, "username must be at least 6 characters")
@@ -92,42 +91,29 @@ const submit = (event) => {
 }
     return (
         <div>
-          <Container>
-            <Row>
-              <Col className="bg-primary mt-5">
-            <h1>Sign Up!</h1>   
-               <form  onSubmit={submit}>
-              <FormGroup >
-                  <Label  for="username">
-                  Username
-                  <Input  className="w-100" name="username" type="text" onChange={onInputChange}  value={formData.username}/>
-                  </Label>
-                  {errorState.username.length > 0 ? (<p className="error text-white">{errorState.username}</p>) : null}
-                </FormGroup>
-              <FormGroup>
-                <Label for="email">
+            <h1>Sign Up!</h1>
+            <form onSubmit={submit}>
+                <label>
+                Username
+                {errorState.username.length > 0 ? (<p className="error">{errorState.username}</p>) : null}
+                <input name="username" type="text" onChange={onInputChange}  value={formData.username}/>
+                </label>
+                <label>
                 Email
-                <Input name="email" type="text" onChange={onInputChange}  value={formData.email}/>
-                </Label>
-                {errorState.email.length > 0 ? (<p className="error text-white">{errorState.email}</p>) : null}
-                </FormGroup>
-                <FormGroup>
-                <Label for="password">
-                Password      
-                <Input name="password" type="password" onChange={onInputChange}value={formData.password}/>    
-                </Label>
-                {errorState.password.length > 0 ? (<p className="text-white error">{errorState.password}</p>) : null}
-                </FormGroup>
-                <Label>
-                Select the state you reside in
-                <br />
+                {errorState.email.length > 0 ? (<p className="error">{errorState.email}</p>) : null}
+                <input name="email" type="text" onChange={onInputChange}  value={formData.email}/>
+                </label>
+                <label>
+                Password
+                {errorState.password.length > 0 ? (<p className="error">{errorState.password}</p>) : null}
+                <input name="password" type="password" onChange={onInputChange}value={formData.password}/>
+                </label>
+                <label>
+                <br />  Location
                <SelectUSState  onChange={statePick}/>
-                </Label>
-            <Input style={buttonDisabled ? {backgroundColor: 'red', color: 'white'} : {backgroundColor: 'white'}}  className="mb-3 mt-2" disabled={buttonDisabled} type="submit" value={buttonDisabled ? 'You must finish filling out the form to register' : 'submit'} />
-            </form>  
-                </Col>
-              </Row>
-            </Container>
+                </label>
+            <input disabled={buttonDisabled} type="submit" value="Submit" />
+            </form>
         </div>
     )
 }
