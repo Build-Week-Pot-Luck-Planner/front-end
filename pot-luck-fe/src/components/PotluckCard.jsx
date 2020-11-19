@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Potluck = styled.div`
@@ -8,18 +9,13 @@ border: 1px #f4f9e9 solid;
 border-radius: 10px;
 padding: 1rem;
 max-width: 500px;
-margin: 1rem 0;
+margin: 1rem;
 text-align: center;
 `
 
 const DataContainer = styled.div`
 display: flex;
-width: 500px;
-`
-
-const ItemContainer = styled.div`
-border: 1px solid black;
-width: 45%
+width: 450px;
 `
 
 const DateTimeContainer = styled.div`
@@ -29,27 +25,35 @@ width: 45%;
 
 const PotluckCard = (props) => {
 
+  const potluckId = props.potluck.potluckId;
+  const history = useHistory();
+
+  // const formattedDate = new Date(props.potluck.when);
+  const formattedDate = (props.potluck.when);
+
 
   return (
     <>
-        <Potluck key={props.potluck.id}>
-      <h1>{props.potluck.title}</h1>
+        <Potluck key={props.potluck.potluckId}>
+      <h2>{props.potluck.title}</h2>
       <DataContainer>
-      <ItemContainer>
-        <h3>Items to Bring</h3>
+      {/* <ItemContainer> */}
+        {/* <h3>Items to Bring</h3>
       {props.potluck.items.map(item => {
         return(
           <li key={item}>{item}</li>
           )
         }
-        )}
-        </ItemContainer>
+        )} */}
+        {/* </ItemContainer> */}
         <DateTimeContainer>
-        <p>When: {props.potluck.datetime}</p>
+        <p>When: {formattedDate}</p>
+        </DateTimeContainer>
+        <DateTimeContainer>
         <p>Where: {props.potluck.location}</p>
         </DateTimeContainer>
         </DataContainer>
-        <button>Edit</button>
+        <button onClick={() => history.push(`/potlucks/${potluckId}`)}>See details</button>
       </Potluck>
     
     </>

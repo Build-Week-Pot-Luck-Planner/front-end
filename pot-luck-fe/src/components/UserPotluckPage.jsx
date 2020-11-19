@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
 import { UserContext } from '../contexts/UserContext';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import UserInvites from './UserInvites';
 
 const Container = styled.div`
 border: 2px #80808059 solid;
@@ -26,7 +27,7 @@ justify-content: space-evenly;
 
 const UserPotluckPage = (props) => {
 
-  const potluck = useContext(PotluckContext);
+  const context = useContext(PotluckContext);
   const history = useHistory();
   const username = localStorage.getItem("username");
 
@@ -35,10 +36,11 @@ const UserPotluckPage = (props) => {
     id: "",
     location: "",
     pfp: "",
-    username: ""
+    username: "",
   });
 
   const [potlucks, setPotlucks] = useState([]);
+  const [invites, setInvites] = useState([]);
 
   useEffect(() => {
     axiosWithAuth()
@@ -53,7 +55,7 @@ const UserPotluckPage = (props) => {
           pfp: res.data.users[0].pfp,
           username: res.data.users[0].username
         })
-        potluck.userIdSetter(res.data.users[0].id);
+        context.userIdSetter(res.data.users[0].id);
       })
       .catch(err => {
         console.log(err);
@@ -65,7 +67,20 @@ const UserPotluckPage = (props) => {
       .get(`https://bw-potluckplanner.herokuapp.com/api/users/${user.id}`)
       .then(res => {
         console.log("This is from UserPotluckPage.js", res);
-        potluck.userDataSetter(res.data.user);
+        context.userDataSetter(res.data.user);
+        setPotlucks(res.data.user.potlucks)
+        console.log("Potlucks", potlucks);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [user.id])
+
+    useEffect(() => {
+    axiosWithAuth()
+      .get(`https://bw-potluckplanner.herokuapp.com/api/users/${user.id}/invitations`)
+      .then(res => {
+        console.log('User Invitations', res);
       })
       .catch(err => {
         console.log(err);
@@ -76,15 +91,16 @@ const UserPotluckPage = (props) => {
     <>
     <UserContext.Provider value={user}>
     <UserInfo />
+    <UserInvites />
     </UserContext.Provider>
     <Container>
       <h2>My Potlucks</h2>
       {
-        potlucks[0] ? 
+      potlucks[0] ? 
       <PotluckContainer>
-      {potluck.map(potluck => {
-      return (
-        <PotluckCard potluck={potluck}/>
+        {potlucks.map(potluck => {
+          return (
+            <PotluckCard potluck={potluck}/>
         )})}
       </PotluckContainer> 
       : 

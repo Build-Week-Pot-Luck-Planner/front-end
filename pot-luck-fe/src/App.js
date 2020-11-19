@@ -4,8 +4,6 @@ import {
   Switch,
   Route,
   Link,
-  useRouteMatch,
-  useParams
 } from "react-router-dom";
 import {
   Navbar,
@@ -18,36 +16,18 @@ import {
 import PrivateRoute from './components/PrivateRoute';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
-import styled from 'styled-components';
-import data from "./data";
 import { PotluckContext } from './contexts/PotluckContext';
 import UserPotluckPage from './components/UserPotluckPage';
 import NewPotluckForm from './components/NewPotluckForm';
 import EditUserForm from './components/EditUserForm';
 import GuestInvite from './components/GuestInvite';
-import axiosWithAuth from './utils/axiosWithAuth';
+import PotluckDetailsPage from './components/PotluckDetailsPage';
 import axios from "axios";
-
-const NavBar = styled.header`
-  box-shadow: 0 5px 10px black;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: lightgrey;
-  padding-bottom: 10px;
-  height: 50px;
-`;
-
-
-
-
 
 function App() {
 
   const [uselessAPI, setUselessAPI] = useState([])
   useEffect(() => {
-
-   
 
     axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
     .then(function (response) {
@@ -76,7 +56,6 @@ function App() {
     text: "Signup"
   }]
 
-  // const [potluckData, setPotluckData] = useState(data);
   const [userId, setUserId] = useState(null);
   const userIdSetter = state => {
     setUserId(state);
@@ -133,6 +112,7 @@ function App() {
             component={UserPotluckPage}
             setUserData={setUserData}
           />
+          <PrivateRoute exact path="/potlucks/:potluckId" component={PotluckDetailsPage}/>
           <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
           <PrivateRoute exact path="/editUser/:id" component={EditUserForm} />
           <PrivateRoute exact path="/invite/:id" component={GuestInvite} />
