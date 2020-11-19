@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Potluck = styled.div`
@@ -23,6 +24,9 @@ width: 45%;
 `
 
 const PotluckCard = (props) => {
+
+  const potluckId = props.potluck.potluckId;
+  const history = useHistory();
 
   // const formattedDate = new Date(props.potluck.when);
   const formattedDate = (props.potluck.when);
@@ -49,7 +53,7 @@ const PotluckCard = (props) => {
         <p>Where: {props.potluck.location}</p>
         </DateTimeContainer>
         </DataContainer>
-        <button>Edit</button>
+        <button onClick={() => history.push(`/potlucks/${potluckId}`)}>See details</button>
       </Potluck>
     
     </>

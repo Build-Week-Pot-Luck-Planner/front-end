@@ -18,6 +18,7 @@ import NewPotluckForm from './components/NewPotluckForm';
 import EditUserForm from './components/EditUserForm';
 import GuestInvite from './components/GuestInvite';
 import axiosWithAuth from './utils/axiosWithAuth';
+import PotluckDetailsPage from './components/PotluckDetailsPage';
 
 const NavBar = styled.header`
   box-shadow: 0 5px 10px black;
@@ -86,6 +87,7 @@ function App() {
             component={UserPotluckPage}
             setUserData={setUserData}
           />
+          <PrivateRoute exact path="/potlucks/:potluckId" component={PotluckDetailsPage}/>
           <PrivateRoute exact path="/newPotluck" component={NewPotluckForm} />
           <PrivateRoute exact path="/editUser/:id" component={EditUserForm} />
           <PrivateRoute exact path="/invite/:id" component={GuestInvite} />
