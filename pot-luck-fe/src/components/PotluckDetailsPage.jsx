@@ -75,13 +75,15 @@ const PotluckDetailsPage = () => {
         <ProfileImg src={potluck.organizerPfp} alt="organizers profile pic"/>
         <h4>Organized by: {potluck.organizerUsername} </h4>
         <p>When: </p>
-        <DatePicker
-          selected={new Date(potluck.when)}
-          timeInputLabel="Time:"
-          dateFormat="MM/dd/yyyy h:mm aa"
-          showTimeInput
-          disabled
-        />
+        { potluck.when ?
+          <DatePicker
+            selected={new Date(potluck.when)}
+            timeInputLabel="Time:"
+            dateFormat="MM/dd/yyyy h:mm aa"
+            showTimeInput
+            disabled
+          /> : null
+        }
         <p>Where: {potluck.location}</p>
       </div>
 
