@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import DatePicker from 'react-datepicker';
 
 const Potluck = styled.div`
 box-shadow: 5px 5px 15px black;
@@ -28,13 +29,9 @@ const PotluckCard = (props) => {
   const potluckId = props.potluck.potluckId;
   const history = useHistory();
 
-  // const formattedDate = new Date(props.potluck.when);
-  const formattedDate = (props.potluck.when);
-
-
   return (
     <>
-        <Potluck key={props.potluck.potluckId}>
+      <Potluck key={props.potluck.potluckId}>
       <h2>{props.potluck.title}</h2>
       <DataContainer>
       {/* <ItemContainer> */}
@@ -47,13 +44,20 @@ const PotluckCard = (props) => {
         )} */}
         {/* </ItemContainer> */}
         <DateTimeContainer>
-        <p>When: {formattedDate}</p>
+          <p>When: </p>
+          <DatePicker
+            selected={new Date(props.potluck.when)}
+            timeInputLabel="Time:"
+            dateFormat="MM/dd/yyyy h:mm aa"
+            showTimeInput
+            disabled
+          />
         </DateTimeContainer>
         <DateTimeContainer>
-        <p>Where: {props.potluck.location}</p>
+          <p>Where: {props.potluck.location}</p>
         </DateTimeContainer>
         </DataContainer>
-        <button onClick={() => history.push(`/potlucks/${potluckId}`)}>See details</button>
+          <button onClick={() => history.push(`/potlucks/${potluckId}`)}>See details</button>
       </Potluck>
     
     </>

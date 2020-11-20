@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
 import Item from './Item';
 import EditPotluckForm from './EditPotluckForm';
+import DatePicker from 'react-datepicker';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -73,8 +74,15 @@ const PotluckDetailsPage = () => {
         <h2>{potluck.title}</h2>
         <ProfileImg src={potluck.organizerPfp} alt="organizers profile pic"/>
         <h4>Organized by: {potluck.organizerUsername} </h4>
-        <p>When: {potluck.when}</p>
-        <p>When: {potluck.location}</p>
+        <p>When: </p>
+        <DatePicker
+          selected={new Date(potluck.when)}
+          timeInputLabel="Time:"
+          dateFormat="MM/dd/yyyy h:mm aa"
+          showTimeInput
+          disabled
+        />
+        <p>Where: {potluck.location}</p>
       </div>
 
       <div>
