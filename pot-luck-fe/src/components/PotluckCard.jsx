@@ -6,7 +6,7 @@ import { Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
 
 const Potluck = styled.div`
 box-shadow: 5px 5px 15px black;
-background-color: #f4f9e9;
+background-color: lightgrey;
 border-radius: 10px;
 padding: 1rem;
 max-width: 500px;
@@ -37,8 +37,9 @@ const PotluckCard = (props) => {
         {/* <DateTimeContainer> */}
         <Row>
         <Col sm="12">
-          <Card body className="text-center" style={{backgroundColor: '#f4f9e9', border: 'none'}}>
-          <CardText>When: </CardText>
+          <Card body className="text-center" style={{backgroundColor: 'lightgrey', border: 'none'}}>
+          <CardText>Where: {props.potluck.location}</CardText>
+          <CardText style={{margin: '0'}}>When: </CardText>
           <DatePicker
             selected={new Date(props.potluck.when)}
             timeInputLabel="Time:"
@@ -46,7 +47,6 @@ const PotluckCard = (props) => {
             showTimeInput
             disabled
           />
-          <CardText>Where: {props.potluck.location}</CardText>
           </Card>
           </Col>
           </Row>
@@ -61,7 +61,7 @@ const PotluckCard = (props) => {
           {/* </Col> */}
           {/* </Row> */}
         {/* </DataContainer> */}
-          <Button onClick={() => history.push(`/potlucks/${potluckId}`)}>See details</Button>
+          <Button style={{marginTop: '15px'}} onClick={() => history.push(`/potlucks/${potluckId}`)}>See details</Button>
       </Potluck>
     
     </Card>

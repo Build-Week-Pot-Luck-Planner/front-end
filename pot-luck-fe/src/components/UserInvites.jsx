@@ -26,7 +26,7 @@ const UserInvites = () => {
 
   return (
     <div>
-      <Card style={{alignItems: 'center'}}>
+      <Card style={{alignItems: 'center', backgroundColor: 'lightgrey'}}>
     <CardTitle tag="h3">Your Potluck Invitations</CardTitle>
     {
     invites[0] ? invites.map(invite => {
