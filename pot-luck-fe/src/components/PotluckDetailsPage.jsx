@@ -4,6 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
 import Item from './Item';
+import EditPotluckForm from './EditPotluckForm';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -20,6 +21,8 @@ const PotluckDetailsPage = () => {
   const [invites, setInvites] = useState([])
   const [items, setItems] = useState([])
   const [guestItems, setGuestItems] = useState([]);
+  const [editing, setEditing] = useState(false);
+  const [edited, setEdited] = useState(false)
   const user = useContext(PotluckContext);
 
   useEffect(() => {
@@ -35,7 +38,7 @@ const PotluckDetailsPage = () => {
       .catch(err => {
         console.log(err);
       })
-  }, [])
+  }, [edited])
 
   useEffect(() => {
     axiosWithAuth()
@@ -54,16 +57,17 @@ const PotluckDetailsPage = () => {
       .delete(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${id.potluckId}`)
       .then(res => {
         console.log(res);
+        history.push("/potlucks");
       })
       .catch(err => {
         console.log(err)
       })
-      // history.push("/potlucks");
   }
   
-
   return(
     <div>
+    {!editing ?
+        <div>
         <h1>Potluck Details Page</h1>
       <div>
         <h2>{potluck.title}</h2>
@@ -79,8 +83,8 @@ const PotluckDetailsPage = () => {
           guests[0] ? guests.map(guest => {
             return(
             <div>
-              <p>Guest Name Here</p>
-              <p>Accepted or Declined Here</p>
+              <ProfileImg src={guest.pfp} alt="guest profile img" />
+              <p>{guest.username}</p>
             </div>
             )
           }) : <p>No Guests Are Attending Yet</p>
@@ -94,7 +98,6 @@ const PotluckDetailsPage = () => {
             return(
             <div>
               <p>{invite.username}</p>
-              <p>Accepted or Declined Here</p>
             </div>
             )
           }) : <p>No Guests Have been Invited</p>
@@ -112,22 +115,12 @@ const PotluckDetailsPage = () => {
         }
       </div>
 
-      {/* <div>
-        <h2>Whose Bringing What</h2>
-        {
-          items.map(item => {
-            return(
-              <div key={item.name}>
-                <h4>{item.name}</h4>
-                <button onClick={updateButtonMessage}>{buttonMessage}</button>
-              </div>
-            )
-          })
-        }
-      </div> */}
-
-      <button>Edit Potluck</button>
-      <button onClick={() => deletePotluck()}>Delete Potluck</button>
+      <button onClick={() => setEditing(true)}>Edit Potluck</button>
+      <button onClick={() => deletePotluck()}>Delete Potluck</button> 
+      </div> : 
+      <div>
+        <EditPotluckForm potluck={potluck} items={items} setEditing={setEditing} setPotluck={setPotluck} setEdited={setEdited} edited={edited}/>
+      </div>}
     </div>
   )
 }

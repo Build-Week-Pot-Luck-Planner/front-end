@@ -5,7 +5,7 @@ const Guest = (props) => {
 return(
   <div>
 <h4>Username: {props.guest.username}</h4>
-<button onClick={() => props.setGuest({id: props.guest.id, username: props.guest.username})}>Invite Guest</button>
+<button onClick={() => props.setGuest({guestId: props.guest.id, username: props.guest.username})}>Invite Guest</button>
 </div>
 )
 }

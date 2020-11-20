@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import Invites from './Invites';
 
 const UserInvites = () => {
 
@@ -24,13 +25,9 @@ const UserInvites = () => {
     <h2>This is for the user invites section</h2>
     {
     invites[0] ? invites.map(invite => {
+      console.log("invites", invite)
       return(
-        <div>
-          <h3>Potluck: {invite.title}</h3>
-          <p>From: {invite.username}</p>
-          <button>Accept</button>
-          <button>Decline</button>
-        </div>
+        <Invites key={invite.invitationId} invite={invite}/>
       )
     }) : <p>You Have No Pending Invites</p>
     }
