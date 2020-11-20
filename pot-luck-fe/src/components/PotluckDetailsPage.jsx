@@ -22,6 +22,7 @@ const PotluckDetailsPage = () => {
   const [items, setItems] = useState([])
   const [guestItems, setGuestItems] = useState([]);
   const [editing, setEditing] = useState(false);
+  const [edited, setEdited] = useState(false)
   const user = useContext(PotluckContext);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const PotluckDetailsPage = () => {
       .catch(err => {
         console.log(err);
       })
-  }, [])
+  }, [edited])
 
   useEffect(() => {
     axiosWithAuth()
@@ -97,7 +98,6 @@ const PotluckDetailsPage = () => {
             return(
             <div>
               <p>{invite.username}</p>
-              <p>Accepted or Declined Here</p>
             </div>
             )
           }) : <p>No Guests Have been Invited</p>
@@ -119,8 +119,7 @@ const PotluckDetailsPage = () => {
       <button onClick={() => deletePotluck()}>Delete Potluck</button> 
       </div> : 
       <div>
-        <EditPotluckForm />
-        <button onClick={() => setEditing(false)}>Submit</button>
+        <EditPotluckForm potluck={potluck} items={items} setEditing={setEditing} setPotluck={setPotluck} setEdited={setEdited} edited={edited}/>
       </div>}
     </div>
   )

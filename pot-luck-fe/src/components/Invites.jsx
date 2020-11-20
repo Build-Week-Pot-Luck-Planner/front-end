@@ -8,8 +8,8 @@ const [inviteMessage, setInviteMessage] = useState(null);
   const answerInvite = (status) => {
     console.log(status);
     axiosWithAuth()
-      // .put(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${props.invite.potluckId}/invitations/${props.invite.id}`, {status: 1})
-      .put(`https://bw-potluckplanner.herokuapp.com/api/potlucks/1/invitations/1`, {status: 1})
+      .put(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${props.invite.potluckId}/invitations/${props.invite.id}`, status)
+      // .put(`https://bw-potluckplanner.herokuapp.com/api/potlucks/1/invitations/1`, {status: 1})
       .then(res => {
         console.log(res)
         setInviteMessage(res.data.message);
