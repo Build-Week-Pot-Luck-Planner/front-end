@@ -83,8 +83,8 @@ const PotluckDetailsPage = () => {
           guests[0] ? guests.map(guest => {
             return(
             <div>
-              <p>Guest Name Here</p>
-              <p>Accepted or Declined Here</p>
+              <ProfileImg src={guest.pfp} alt="guest profile img" />
+              <p>{guest.username}</p>
             </div>
             )
           }) : <p>No Guests Are Attending Yet</p>

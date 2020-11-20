@@ -8,7 +8,7 @@ const [inviteMessage, setInviteMessage] = useState(null);
   const answerInvite = (status) => {
     console.log(status);
     axiosWithAuth()
-      .put(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${props.invite.potluckId}/invitations/${props.invite.id}`, status)
+      .put(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${props.invite.potluckId}/invitations/${props.invite.invitationId}`, status)
       // .put(`https://bw-potluckplanner.herokuapp.com/api/potlucks/1/invitations/1`, {status: 1})
       .then(res => {
         console.log(res)
@@ -22,7 +22,7 @@ const [inviteMessage, setInviteMessage] = useState(null);
 return(
         <div>
           <h3>Potluck: {props.invite.title}</h3>
-          <h4>Organizer: {props.invite.username}</h4>
+          <h4>Organizer: {props.invite.potluckOrganizer}</h4>
           <p>Where: {props.invite.location}</p>
           <p>When: {props.invite.when}</p>
           {

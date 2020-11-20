@@ -27,7 +27,7 @@ const UserInvites = () => {
     invites[0] ? invites.map(invite => {
       console.log("invites", invite)
       return(
-        <Invites key={invite.id} invite={invite}/>
+        <Invites key={invite.invitationId} invite={invite}/>
       )
     }) : <p>You Have No Pending Invites</p>
     }
