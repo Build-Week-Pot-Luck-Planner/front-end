@@ -7,17 +7,20 @@ import { PotluckContext } from '../contexts/PotluckContext';
 import { UserContext } from '../contexts/UserContext';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import UserInvites from './UserInvites';
+import { Button } from 'reactstrap';
 
 const Container = styled.div`
-border: 2px #80808059 solid;
+// border: 2px #80808059 solid;
 border-radius: 3px;
 padding: 2%;
 display: flex;
+flex-direction: column;
 flex-wrap: wrap;
+align-items: center;
 justify-content: space-evenly;
 `
 const PotluckContainer = styled.div`
-border: 2px #80808059 solid;
+// border: 2px #80808059 solid;
 border-radius: 3px;
 padding: 2%;
 display: flex;
@@ -106,7 +109,7 @@ const UserPotluckPage = (props) => {
       : 
       <h3>Add a Potluck to begin organizing</h3>
       }
-      <button onClick={() => history.push("/newPotluck")}>New Potluck</button>
+      <Button onClick={() => history.push("/newPotluck")}>New Potluck</Button>
     </Container>
     </>
   )

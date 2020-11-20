@@ -1,13 +1,18 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { UserContext } from '../contexts/UserContext';
-import axiosWithAuth from '../utils/axiosWithAuth';
+import {
+  Card, CardImg, CardText, CardBody,
+  CardTitle, Button
+} from 'reactstrap';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
+border: 1px solid black;
 border-radius: 100%;
-height: 100px;
+// height: 100px;
+width: 10%
 `
 
 const UserInfo = () => {
@@ -17,14 +22,18 @@ const UserInfo = () => {
   const id = user.id;
 
   return (
-    <div>
+
+      <Card style={{display: 'flex', alignItems: 'center'}}>
     <ProfileImg src={user.pfp} alt="User Profile img"/>
     {/* <h2>User Profile Information</h2> */}
-    <h3>Username: {user.username}</h3>
-    <p>Email: {user.email}</p>
-    <p>Location: {user.location}</p>
-    <button onClick={() => history.push(`/editUser/${id}`)}>Edit Profile</button>
-    </div>
+    <CardBody style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <CardTitle tag="h4">Username: {user.username}</CardTitle>
+    <CardText>Email: {user.email}</CardText>
+    <CardText>Location: {user.location}</CardText>
+    <Button onClick={() => history.push(`/editUser/${id}`)}>Edit Profile</Button>
+    </CardBody>
+    </Card>
+
   )
 }
 

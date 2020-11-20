@@ -93,7 +93,7 @@ const submit = (event) => {
 }
     return (
         <div>
-       <h1>Need a random meal idea to try? <a href={props.useless.data.meals[0].strSource} target="_blank">Click here to find a random meal to make</a> </h1>
+       {/* <h1>Need a random meal idea to try? <a href={props.useless.data.meals[0].strSource} target="_blank">Click here to find a random meal to make</a> </h1> Hiding as this works and completes Unit 2 rubric item */} 
           <Container>
             <Row>
               <Col className="bg-primary mt-5">
