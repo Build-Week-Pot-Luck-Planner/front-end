@@ -19,7 +19,7 @@ const GuestInvite = () => {
     setGuests(
     guests.filter(oldGuest => guest.id !== oldGuest.id)
     )
-    console.log(invitedGuests)
+    console.log("Invited guests", invitedGuests)
   }
 
   const changeHandler = (e) => {

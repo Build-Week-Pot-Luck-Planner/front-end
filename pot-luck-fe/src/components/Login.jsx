@@ -1,7 +1,5 @@
 import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom';
-import * as yup from 'yup'
-// import axiosWithAuth from "../utils/axiosWithAuth";
 import axios from 'axios';
 
 function Login() {
@@ -30,6 +28,7 @@ function Login() {
             .then(res => {
                 console.log(res);
                 localStorage.setItem("token", res.data.token)
+                history.push("/potlucks");
             })
             .catch(err => {
                 console.log(err)
@@ -40,7 +39,6 @@ function Login() {
             password: '',
         })
 
-        history.push("/potlucks");
     }
 
     return (

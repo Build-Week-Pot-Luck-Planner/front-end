@@ -4,6 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
 import Item from './Item';
+import EditPotluckForm from './EditPotluckForm';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -20,6 +21,7 @@ const PotluckDetailsPage = () => {
   const [invites, setInvites] = useState([])
   const [items, setItems] = useState([])
   const [guestItems, setGuestItems] = useState([]);
+  const [editing, setEditing] = useState(false);
   const user = useContext(PotluckContext);
 
   useEffect(() => {
@@ -61,9 +63,10 @@ const PotluckDetailsPage = () => {
       })
   }
   
-
   return(
     <div>
+    {!editing ?
+        <div>
         <h1>Potluck Details Page</h1>
       <div>
         <h2>{potluck.title}</h2>
@@ -112,22 +115,13 @@ const PotluckDetailsPage = () => {
         }
       </div>
 
-      {/* <div>
-        <h2>Whose Bringing What</h2>
-        {
-          items.map(item => {
-            return(
-              <div key={item.name}>
-                <h4>{item.name}</h4>
-                <button onClick={updateButtonMessage}>{buttonMessage}</button>
-              </div>
-            )
-          })
-        }
-      </div> */}
-
-      <button>Edit Potluck</button>
-      <button onClick={() => deletePotluck()}>Delete Potluck</button>
+      <button onClick={() => setEditing(true)}>Edit Potluck</button>
+      <button onClick={() => deletePotluck()}>Delete Potluck</button> 
+      </div> : 
+      <div>
+        <EditPotluckForm />
+        <button onClick={() => setEditing(false)}>Submit</button>
+      </div>}
     </div>
   )
 }
