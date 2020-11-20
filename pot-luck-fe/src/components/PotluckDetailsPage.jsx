@@ -54,11 +54,11 @@ const PotluckDetailsPage = () => {
       .delete(`https://bw-potluckplanner.herokuapp.com/api/potlucks/${id.potluckId}`)
       .then(res => {
         console.log(res);
+        history.push("/potlucks");
       })
       .catch(err => {
         console.log(err)
       })
-      // history.push("/potlucks");
   }
   
 
