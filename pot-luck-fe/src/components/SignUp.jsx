@@ -94,38 +94,38 @@ const submit = (event) => {
     return (
         <div>
        {/* <h1>Need a random meal idea to try? <a href={props.useless.data.meals[0].strSource} target="_blank">Click here to find a random meal to make</a> </h1> Hiding as this works and completes Unit 2 rubric item */} 
-          <Container>
+          <Container style={{display: 'flex', justifyContent: 'center'}}>
             <Row>
-              <Col className="bg-primary mt-5">
+              <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'lightgrey'}} className="mt-5">
             <h1>Sign Up!</h1>   
-               <form  onSubmit={submit}>
+               <form onSubmit={submit}>
               <FormGroup >
                   <Label  for="username">
                   Username
                   <Input  className="w-100" name="username" type="text" onChange={onInputChange}  value={formData.username}/>
                   </Label>
-                  {errorState.username.length > 0 ? (<p className="error text-white">{errorState.username}</p>) : null}
+                  {errorState.username.length > 0 ? (<p className="error">{errorState.username}</p>) : null}
                 </FormGroup>
               <FormGroup>
                 <Label for="email">
                 Email
                 <Input name="email" type="text" onChange={onInputChange}  value={formData.email}/>
                 </Label>
-                {errorState.email.length > 0 ? (<p className="error text-white">{errorState.email}</p>) : null}
+                {errorState.email.length > 0 ? (<p className="error">{errorState.email}</p>) : null}
                 </FormGroup>
                 <FormGroup>
                 <Label for="password">
                 Password      
                 <Input name="password" type="password" onChange={onInputChange}value={formData.password}/>    
                 </Label>
-                {errorState.password.length > 0 ? (<p className="text-white error">{errorState.password}</p>) : null}
+                {errorState.password.length > 0 ? (<p className="error">{errorState.password}</p>) : null}
                 </FormGroup>
                 <Label>
                 Select the state you reside in
                 <br />
                <SelectUSState  onChange={statePick}/>
                 </Label>
-            <Input style={buttonDisabled ? {backgroundColor: 'red', color: 'white'} : {backgroundColor: 'white'}}  className="mb-3 mt-2" disabled={buttonDisabled} type="submit" value={buttonDisabled ? 'You must finish filling out the form to register' : 'submit'} />
+            <Input style={buttonDisabled ? {backgroundColor: 'orange', color: 'white'} : {backgroundColor: 'white'}}  className="mb-3 mt-2" disabled={buttonDisabled} type="submit" value={buttonDisabled ? 'You must finish filling out the form to register' : 'submit'} />
             </form>  
                 </Col>
               </Row>
