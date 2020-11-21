@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'reactstrap'
 
 const Item = (props) => {
 
@@ -10,9 +11,9 @@ const Item = (props) => {
   }
 
   return(
-    <div key={props.item.name}>
+    <div style={{margin: '0 15px', textAlign: 'center'}} key={props.item.name}>
       <h4>{props.item.name}</h4>
-      <button onClick={updateItem}>{buttonMessage}</button>
+      <Button onClick={updateItem}>{buttonMessage}</Button>
     </div>
   )
 }
