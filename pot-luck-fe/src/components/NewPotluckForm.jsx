@@ -4,6 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import SelectUSState from 'react-select-us-states';
+import { Button, FormGroup, Input, Container, Row, Col } from 'reactstrap';
 
 const NewPotluckForm = () => {
 
@@ -60,43 +61,53 @@ const submit = (e) => {
 }
 
   return (
-    <div>
-    <h1>Add New Potluck</h1>
-    <form onSubmit={submit}>
-      <input 
-      type="text"
-      name="title"
-      id="title"
-      placeholder="Title"
-      value={formData.title}
-      onChange={changeHandler}
-      />
-      <br/>
+    <Container style={{display: 'flex', justifyContent: 'center'}}>
+      <Row>
+        <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'lightgrey'}} className="mt-5">
+          <h1>Add New Potluck</h1>
+          <form onSubmit={submit}>
+          <FormGroup >
+            <Input 
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Title"
+            value={formData.title}
+            onChange={changeHandler}
+            />
+           </FormGroup>
 
-      <SelectUSState  onChange={statePick}/>
-      <br/>
+          <FormGroup >
+            <SelectUSState  onChange={statePick}/>
+           </FormGroup>
 
-      <textarea 
-      name="items"
-      id="items"
-      placeholder="Add new items separated by commas"
-      value={formData.items.join(', ')}
-      onChange={changeHandler}
-      />
-      <br/>
+          <FormGroup >
+            <Input 
+            type="textarea"
+            name="items"
+            id="items"
+            placeholder="Add new items separated by commas"
+            value={formData.items.join(', ')}
+            onChange={changeHandler}
+            />
+          </FormGroup>
 
-      <DatePicker
-      selected={formData.when}
-      onChange={dateHandler}
-      timeInputLabel="Time:"
-      dateFormat="MM/dd/yyyy h:mm aa"
-      showTimeInput
-    />
+          <FormGroup >
+            <DatePicker
+            selected={formData.when}
+            onChange={dateHandler}
+            timeInputLabel="Time:"
+            dateFormat="MM/dd/yyyy h:mm aa"
+            showTimeInput
+            />
+          </FormGroup>
 
-    <button>Submit</button>
-    
-    </form>
-    </div>
+          <Button className="mb-3 mt-2">Submit</Button>
+          
+          </form>
+        </Col>
+      </Row>
+    </Container>
   )
 };
 
