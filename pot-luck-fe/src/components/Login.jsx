@@ -72,7 +72,7 @@ function Login() {
             </Row>
         </Container>
         : 
-                <Container style={{display: 'flex', justifyContent: 'center'}}>
+                <Container >
             <Row>
                 <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} className="mt-5">
                     <h1>Logging In...</h1>
