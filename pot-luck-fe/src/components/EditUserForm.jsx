@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import SelectUSState from 'react-select-us-states';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap';
 
 function EditUserForm() {
     const id = useParams();
@@ -73,39 +74,51 @@ const submit = (event) => {
 }
   
     return (
-        <div>
-            <h1>Edit Profile</h1>
-            <form onSubmit={submit}>
-                <label>
-                Username
-                <input name="username" type="text" onChange={onInputChange}  value={formData.username}/>
-                </label>
-                <br />
-                <label>
-                Email
-                <input name="email" type="text" onChange={onInputChange}  value={formData.email}/>
-                </label>
-                <br />
-                <label>
-                Password
-                <input name="password" type="password" onChange={onInputChange}value={formData.password}/>
-                </label>
-                <br />
-                <label>
-                Profile Picture URL
-                <input name="pfp" type="text" onChange={onInputChange}value={formData.pfp}/>
-                </label>
-                <br />
-                <label>
-                <br />  Location
-               <SelectUSState  onChange={statePick}/>
-      
-               
-                </label>
+        <Container style={{display: 'flex', justifyContent: 'center'}}>
+            <Row>
+            <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'lightgrey'}} className="mt-5">
+                <h1>Edit Profile</h1>
+                <form onSubmit={submit}>
+                    <FormGroup >
+                    <Label>
+                    Username
+                    <Input name="username" type="text" onChange={onInputChange}  value={formData.username}/>
+                    </Label>
+                    </FormGroup>
 
-            <input type="submit" value="Submit" />
-            </form>
-        </div>
+                    <FormGroup >
+                    <Label>
+                    Email
+                    <Input name="email" type="text" onChange={onInputChange}  value={formData.email}/>
+                    </Label>
+                    </FormGroup>
+
+                    <FormGroup >
+                    <Label>
+                    Password
+                    <Input name="password" type="password" onChange={onInputChange}value={formData.password}/>
+                    </Label>
+                    </FormGroup>
+
+                    <FormGroup >
+                    <Label>
+                    Profile Picture URL
+                    <Input name="pfp" type="text" onChange={onInputChange}value={formData.pfp}/>
+                    </Label>
+                    </FormGroup>
+
+                    <FormGroup >
+                    <Label>
+                    Location
+                <SelectUSState  onChange={statePick}/>
+                    </Label>
+                    </FormGroup>
+
+                <Input className="mb-3 mt-2" type="submit" value="Submit" />
+                </form>
+            </Col>
+            </Row>
+        </Container>
     )
 }
 

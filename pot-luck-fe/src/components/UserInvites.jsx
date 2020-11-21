@@ -2,6 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import Invites from './Invites';
+import {
+  Card, CardText,
+  CardTitle
+} from 'reactstrap';
 
 const UserInvites = () => {
 
@@ -22,15 +26,17 @@ const UserInvites = () => {
 
   return (
     <div>
-    <h2>This is for the user invites section</h2>
+      <Card style={{alignItems: 'center', backgroundColor: 'lightgrey', padding: '10px'}}>
+    <CardTitle tag="h3">Your Potluck Invitations</CardTitle>
     {
     invites[0] ? invites.map(invite => {
       console.log("invites", invite)
       return(
         <Invites key={invite.invitationId} invite={invite}/>
       )
-    }) : <p>You Have No Pending Invites</p>
+    }) : <CardText>You Have No Pending Invites</CardText>
     }
+    </Card>
     </div>
   )
 }

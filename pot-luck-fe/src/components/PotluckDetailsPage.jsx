@@ -5,6 +5,11 @@ import styled from 'styled-components';
 import { PotluckContext } from '../contexts/PotluckContext';
 import Item from './Item';
 import EditPotluckForm from './EditPotluckForm';
+import DatePicker from 'react-datepicker';
+import {
+  Card, CardImg, CardText, CardBody,
+  CardTitle, Button
+} from 'reactstrap';
 
 const ProfileImg = styled.img`
 margin-top: 2%;
@@ -68,44 +73,54 @@ const PotluckDetailsPage = () => {
     <div>
     {!editing ?
         <div>
-        <h1>Potluck Details Page</h1>
-      <div>
-        <h2>{potluck.title}</h2>
+        <CardTitle tag="h1" style={{textAlign: 'center'}}>Potluck Details Page</CardTitle>
+        <Card style={{display: 'flex', alignItems: 'center', padding: '15px'}}>
+        <CardText tag="h2">{potluck.title}</CardText>
         <ProfileImg src={potluck.organizerPfp} alt="organizers profile pic"/>
-        <h4>Organized by: {potluck.organizerUsername} </h4>
-        <p>When: {potluck.when}</p>
-        <p>When: {potluck.location}</p>
-      </div>
+        <CardText tag="h4">Organized by: {potluck.organizerUsername} </CardText>
+        <CardText>Where: {potluck.location}</CardText>
+        <CardText style={{margin: '0'}}>When: </CardText>
+        { potluck.when ?
+          <DatePicker
+            selected={new Date(potluck.when)}
+            timeInputLabel="Time:"
+            dateFormat="MM/dd/yyyy h:mm aa"
+            showTimeInput
+            disabled
+          /> : null
+        }
+      </Card>
 
-      <div>
-        <h2>Guests</h2>
+      <Card style={{display: 'flex', alignItems: 'center', backgroundColor: 'lightgrey'}}>
+        <CardTitle tag="h2">Guests</CardTitle>
         {
           guests[0] ? guests.map(guest => {
             return(
-            <div>
+            <CardBody style={{display: 'flex', flexDirection: "column", alignItems: 'center'}}>
+              <CardText tag="h4">{guest.username}</CardText>
               <ProfileImg src={guest.pfp} alt="guest profile img" />
-              <p>{guest.username}</p>
-            </div>
+            </CardBody>
             )
           }) : <p>No Guests Are Attending Yet</p>
         }
-      </div>
+      </Card>
 
-      <div>
+      <Card style={{display: 'flex', alignItems: 'center'}}>
         <h2>Guest Invites</h2>
+        <CardBody style={{display: 'flex'}}>
         {
           invites[0] ? invites.map(invite => {
             return(
-            <div>
-              <p>{invite.username}</p>
-            </div>
-            )
-          }) : <p>No Guests Have been Invited</p>
-        }
-      </div>
+              <CardText style={{margin: '0 15px'}} tag="h4">{invite.username}</CardText>
+              )
+            }) : <p>No Guests Have been Invited</p>
+          }
+          </CardBody>
+      </Card>
 
-      <div>
+      <Card style={{display: 'flex', alignItems: 'center', backgroundColor: 'lightgrey'}}>
         <h2>Items to Bring</h2>
+        <CardBody style={{display: 'flex'}}>
         {
           items.map(item => {
             return(
@@ -113,10 +128,12 @@ const PotluckDetailsPage = () => {
             )
           })
         }
+        </CardBody>
+      </Card>
+        <div style={{display: 'flex', justifyContent: 'center', margin: '25px'}}>
+      <Button style={{margin: '0 15px'}} onClick={() => setEditing(true)}>Edit Potluck</Button>
+      <Button style={{margin: '0 15px'}} onClick={() => deletePotluck()}>Delete Potluck</Button> 
       </div>
-
-      <button onClick={() => setEditing(true)}>Edit Potluck</button>
-      <button onClick={() => deletePotluck()}>Delete Potluck</button> 
       </div> : 
       <div>
         <EditPotluckForm potluck={potluck} items={items} setEditing={setEditing} setPotluck={setPotluck} setEdited={setEdited} edited={edited}/>

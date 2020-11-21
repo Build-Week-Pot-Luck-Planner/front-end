@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import {
+  Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button
+} from 'reactstrap';
 
 const Invites = (props) => {
 
@@ -21,17 +25,19 @@ const [inviteMessage, setInviteMessage] = useState(null);
 
 return(
         <div>
-          <h3>Potluck: {props.invite.title}</h3>
-          <h4>Organizer: {props.invite.potluckOrganizer}</h4>
-          <p>Where: {props.invite.location}</p>
-          <p>When: {props.invite.when}</p>
+          <Card style={{border: 'none', display: 'flex', alignItems: 'center', backgroundColor: 'lightgrey'}}>
+            <CardBody>
+          <CardTitle tag="h3">Potluck: {props.invite.title}</CardTitle>
+          <CardTitle tag="h4">Organizer: {props.invite.potluckOrganizer}</CardTitle>
           {
             inviteMessage ? <p>{inviteMessage}</p> : 
           <div>
-            <button onClick={() => answerInvite({status: 1})}>Accept</button>
-            <button onClick={() => answerInvite({status: -1})}>Decline</button>
+            <Button style={{margin: '0 5px'}} onClick={() => answerInvite({status: 1})}>Accept</Button>
+            <Button style={{margin: '0 5px'}} onClick={() => answerInvite({status: -1})}>Decline</Button>
           </div>
           }
+            </CardBody>
+          </Card>
         </div>
 )
 }
