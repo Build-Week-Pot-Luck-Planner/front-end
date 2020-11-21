@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Form, FormGroup, Label, Input, FormText, Container, Row, Col } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Spinner, Container, Row, Col } from 'reactstrap';
 
 function Login() {
+
+    const [loggingIn, setLoggingIn] = useState(false)
 
     const [formData, setFormData] = useState({
         username: '',
@@ -23,6 +25,7 @@ function Login() {
 
     const onSub = e => {
         e.preventDefault();
+        setLoggingIn(true);
         localStorage.setItem("username", formData.username);
         axios 
             .post(`https://bw-potluckplanner.herokuapp.com/api/auth/login`, formData)
@@ -30,9 +33,11 @@ function Login() {
                 console.log(res);
                 localStorage.setItem("token", res.data.token)
                 history.push("/potlucks");
+                setLoggingIn(false)
             })
             .catch(err => {
                 console.log(err)
+                setLoggingIn(false)
             });
 
         setFormData({
@@ -43,6 +48,8 @@ function Login() {
     }
 
     return (
+        <div>
+        {!loggingIn ?
         <Container style={{display: 'flex', justifyContent: 'center'}}>
             <Row>
                 <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'lightgrey'}} className="mt-5">
@@ -64,6 +71,18 @@ function Login() {
                 </Col>
             </Row>
         </Container>
+        : 
+                <Container style={{display: 'flex', justifyContent: 'center'}}>
+            <Row>
+                <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}} className="mt-5">
+                    <h1>Logging In...</h1>
+                    <Spinner style={{ width: '4rem', height: '4rem' }} color="primary" />
+                </Col>
+            </Row>
+        </Container>
+        
+    }
+        </div>
     )
 }
 
