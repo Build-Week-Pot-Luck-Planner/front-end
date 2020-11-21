@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import Guest from './Guest';
+import {
+  Card, CardImg, CardText, CardBody,
+  CardTitle, Button, FormGroup, Input, Container, Row, Col, Label
+} from 'reactstrap';
 
 const GuestInvite = () => {
 
@@ -17,7 +21,13 @@ const GuestInvite = () => {
     // setInvitedGuests(invitedGuests.includes(guest.id) ? [...invitedGuests, guest] : invitedGuests);
     setInvitedGuests([...invitedGuests, guest]);
     setGuests(
-    guests.filter(oldGuest => guest.id !== oldGuest.id)
+    guests.filter(oldGuest => {
+      // console.log("guest.id", guest)
+      // console.log("oldGuest.id", oldGuest.id)
+      return(
+        guest.guestId !== oldGuest.id
+      )
+    })
     )
     console.log("Invited guests", invitedGuests)
   }
@@ -53,28 +63,34 @@ const GuestInvite = () => {
   }
 
   return(
-  <div>
-    <h1>You Made it to Guest Invitations page</h1>
-    <p>Not that you've began to organize a new potluck why not invite some guests?</p>
-    <label htmlFor="search">Search: </label>
-    <input 
-    type="text"
-    name="search"
-    id="search"
-    placeholder="Search for guests to invite"
-    value={search}
-    onChange={changeHandler}
-    />
-    { 
-    guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest} setGuest={updateGuests}/>) : <h4>Search for the Username of guests you want to invite</h4>
-    }
-    <br/>
-    <h3>Invited Guests:</h3>
-    {
-      invitedGuests[0] ? invitedGuests.map(guest => <h4>{guest.username}</h4>) : <h4>{inviteMessage}</h4>
-    }
-    <button onClick={() => inviteGuests()}>Invite Guests!</button>
-  </div>
+<Container style={{display: 'flex', justifyContent: 'center'}}>
+  <Row>
+    <Col style={{display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'lightgrey'}} className="mt-5">
+      <h1>Guest Invitations</h1>
+      <p>Now that you've began to organize a new potluck why not invite some guests?</p>
+        <FormGroup>
+        {/* <Label htmlFor="search">Search: </Label> */}
+        <Input 
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Search for guests to invite"
+        value={search}
+        onChange={changeHandler}
+        />
+        </FormGroup>
+        { 
+          guests[0] ? guests.map(guest => <Guest key={guest.id} guest={guest} setGuest={updateGuests}/>) : <h4>Search for the Username of guests you want to invite</h4>
+        }
+      
+      <h3>Invited Guests:</h3>
+      {
+        invitedGuests[0] ? invitedGuests.map(guest => <h4>{guest.username}</h4>) : <h4>{inviteMessage}</h4>
+      }
+      <Button className="mb-3 mt-2" onClick={() => inviteGuests()}>Invite Guests!</Button>
+    </Col>
+  </Row>
+</Container>
   )
 }
 
