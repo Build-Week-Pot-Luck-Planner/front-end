@@ -4,7 +4,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 import Invites from './Invites';
 import {
   Card, CardText,
-  CardTitle
+  CardTitle, CardBody
 } from 'reactstrap';
 
 const UserInvites = () => {
@@ -28,6 +28,7 @@ const UserInvites = () => {
     <div>
       <Card style={{alignItems: 'center', backgroundColor: 'lightgrey', padding: '10px'}}>
     <CardTitle tag="h3">Your Potluck Invitations</CardTitle>
+    <CardBody style={{display: 'flex'}}>
     {
     invites[0] ? invites.map(invite => {
       console.log("invites", invite)
@@ -36,6 +37,7 @@ const UserInvites = () => {
       )
     }) : <CardText>You Have No Pending Invites</CardText>
     }
+    </CardBody>
     </Card>
     </div>
   )

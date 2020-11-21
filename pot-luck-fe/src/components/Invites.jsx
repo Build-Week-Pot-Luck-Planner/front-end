@@ -23,9 +23,11 @@ const [inviteMessage, setInviteMessage] = useState(null);
       })
   }
 
+  const cardStyles = {border: 'none', display: 'flex', backgroundColor: 'lightgrey', boxShadow: '5px 5px 15px black', margin: '15px'}
+
 return(
         <div>
-          <Card style={{border: 'none', display: 'flex', alignItems: 'center', backgroundColor: 'lightgrey'}}>
+          <Card style={cardStyles}>
             <CardBody>
           <CardTitle tag="h3">Potluck: {props.invite.title}</CardTitle>
           <CardTitle tag="h4">Organizer: {props.invite.potluckOrganizer}</CardTitle>
